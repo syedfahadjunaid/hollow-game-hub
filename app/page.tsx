@@ -1,5 +1,5 @@
-import { RetroModeSwitcher } from "@/components/ui/retro-mode-switcher";
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  return <RetroModeSwitcher />;
+  return redirect("/auth");
 }
