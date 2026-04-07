@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
+import Portal from "./Portal";
 
-export default function page() {
-  return redirect("/auth/login");
+export default async function page() {
+  return <Portal />;
 }
