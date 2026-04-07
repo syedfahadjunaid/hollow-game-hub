@@ -1,6 +1,5 @@
-import { Button } from "@/components/ui/8bit/button";
-import React from "react";
+import { LoginForm } from "@/components/ui/8bit/blocks/login-form";
 
 export default function page() {
-  return <Button>Login</Button>;
+  return <LoginForm />;
 }
