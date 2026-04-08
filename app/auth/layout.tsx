@@ -16,10 +16,7 @@ export default function layout({
           <h1 className="text-xl font-semibold tracking-tight">
             Hollow Game Hub
           </h1>
-          <div className="flex items-center gap-4">
-            <RetroModeSwitcher />
-            <ThemeSelector />
-          </div>
+          <ThemeSelector />
         </div>
       </Card>
 
