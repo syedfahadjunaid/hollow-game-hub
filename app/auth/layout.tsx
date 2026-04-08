@@ -1,8 +1,7 @@
 import { RetroModeSwitcher } from "@/components/ui/retro-mode-switcher";
 import React from "react";
 import { Card } from "@/components/ui/8bit/card";
-import { Button } from "@/components/ui/8bit/button";
-import Link from "next/link";
+import ThemeSelector from "@/components/ui/8bit/theme-selector";
 
 export default function layout({
   children,
@@ -19,9 +18,7 @@ export default function layout({
           </h1>
           <div className="flex items-center gap-4">
             <RetroModeSwitcher />
-            <Link href="/auth/sign-up">
-              <Button>Sign Up</Button>
-            </Link>
+            <ThemeSelector />
           </div>
         </div>
       </Card>
