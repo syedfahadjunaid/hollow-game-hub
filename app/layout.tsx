@@ -34,7 +34,7 @@ export default function RootLayout({
           attribute="class"
           defaultTheme="system"
           enableSystem
-          disableTransitionOnChange
+          themes={["light", "dark", "sega", "gameboy", "atari"]}
         >
           <main className="grow">{children}</main>
         </ThemeProvider>
