@@ -34,7 +34,18 @@ export default function RootLayout({
           attribute="class"
           defaultTheme="system"
           enableSystem
-          themes={["light", "dark", "sega", "gameboy", "atari"]}
+          themes={[
+            "light",
+            "dark",
+            "default-light",
+            "default-dark",
+            "sega-light",
+            "sega-dark",
+            "gameboy-light",
+            "gameboy-dark",
+            "atari-light",
+            "atari-dark",
+          ]}
         >
           <main className="grow">{children}</main>
         </ThemeProvider>
