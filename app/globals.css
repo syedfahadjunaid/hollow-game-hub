@@ -49,6 +49,7 @@
 }
 
 :root {
+  --radius: 0.65rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -67,12 +68,12 @@
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --radius: 0rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
@@ -102,11 +103,11 @@
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
   --sidebar: oklch(0.205 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
   --sidebar-primary: oklch(0.488 0.243 264.376);
@@ -115,6 +116,215 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+}
+
+.sega {
+  --radius: 0rem;
+  --primary: oklch(0.5 0.2 260);
+  --primary-foreground: oklch(0.9 0.02 260);
+  --background: oklch(0.85 0.1 220);
+  --foreground: oklch(0.1 0.1 280);
+  --card: oklch(0.85 0.1 220);
+  --card-foreground: oklch(0.1 0.1 280);
+  --popover: oklch(0.85 0.1 220);
+  --popover-foreground: oklch(0.1 0.1 280);
+  --secondary: oklch(0.5 0.2 260);
+  --secondary-foreground: oklch(0.1 0.1 280);
+  --muted: oklch(0.1 0.1 280);
+  --muted-foreground: oklch(0.5 0.2 280);
+  --accent: oklch(0.5 0.2 260);
+  --accent-foreground: oklch(1 0 0);
+  --destructive: oklch(0.6 0.2 20);
+  --border: oklch(0.5 0.2 260);
+  --input: oklch(0.5 0.2 260);
+  --ring: oklch(0.5 0.2 260);
+  --chart-1: oklch(0.5 0.2 260);
+  --chart-2: oklch(0.3 0.2 260);
+  --chart-3: oklch(0.7 0.1 250);
+  --chart-4: oklch(0.6 0.15 250);
+  --chart-5: oklch(0.4 0.15 250);
+  --sidebar: oklch(0.85 0.1 220);
+  --sidebar-foreground: oklch(0.1 0.1 280);
+  --sidebar-primary: oklch(0.5 0.2 260);
+  --sidebar-primary-foreground: oklch(0.9 0.02 260);
+  --sidebar-accent: oklch(0.5 0.2 260);
+  --sidebar-accent-foreground: oklch(1 0 0);
+  --sidebar-border: oklch(0.5 0.2 260);
+  --sidebar-ring: oklch(0.5 0.2 260);
+}
+
+.dark.sega {
+  --primary: oklch(0.5 0.2 260);
+  --primary-foreground: oklch(0.9 0.02 260);
+  --background: oklch(0.1 0.1 280);
+  --foreground: oklch(0.9 0.02 260);
+  --card: oklch(0.1 0.1 280);
+  --card-foreground: oklch(0.9 0.02 260);
+  --popover: oklch(0.1 0.1 280);
+  --popover-foreground: oklch(0.9 0.02 260);
+  --secondary: oklch(0.5 0.2 260);
+  --secondary-foreground: oklch(0.9 0.02 260);
+  --muted: oklch(0.5 0.2 260);
+  --muted-foreground: oklch(0.85 0.1 220);
+  --accent: oklch(0.5 0.2 260);
+  --accent-foreground: oklch(1 0 0);
+  --destructive: oklch(0.5 0.2 20);
+  --border: oklch(0.5 0.2 260);
+  --input: oklch(0.5 0.2 260);
+  --ring: oklch(0.5 0.2 260);
+  --chart-1: oklch(0.5 0.2 260);
+  --chart-2: oklch(0.3 0.2 260);
+  --chart-3: oklch(0.5 0.2 280);
+  --chart-4: oklch(0.4 0.2 250);
+  --chart-5: oklch(0.4 0.15 250);
+  --sidebar: oklch(0.1 0.1 280);
+  --sidebar-foreground: oklch(0.9 0.05 280);
+  --sidebar-primary: oklch(0.5 0.2 280);
+  --sidebar-primary-foreground: oklch(0.9 0.05 280);
+  --sidebar-accent: oklch(0.5 0.2 280);
+  --sidebar-accent-foreground: oklch(1 0 0);
+  --sidebar-border: oklch(0.5 0.2 280);
+  --sidebar-ring: oklch(0.5 0.2 280);
+}
+
+/* 🟩 GAMEBOY: That classic "Pea Soup" greenish-yellow screen */
+.gameboy {
+  --radius: 0rem;
+  --primary: oklch(0.7 0.2 120);
+  --primary-foreground: oklch(0.2 0.1 140);
+  --background: oklch(0.8 0.2 140);
+  --foreground: oklch(0.2 0.1 140);
+  --card: oklch(0.8 0.2 140);
+  --card-foreground: oklch(0.2 0.1 140);
+  --popover: oklch(0.8 0.2 140);
+  --popover-foreground: oklch(0.2 0.1 140);
+  --secondary: oklch(0.7 0.2 120);
+  --secondary-foreground: oklch(0.2 0.1 140);
+  --muted: oklch(0.7 0.2 120);
+  --muted-foreground: oklch(0.2 0.1 140);
+  --accent: oklch(0.3 0.2 140);
+  --accent-foreground: oklch(0.8 0.2 120);
+  --destructive: oklch(0.5 0.3 30);
+  --border: oklch(0.4 0.2 140);
+  --input: oklch(0.4 0.2 140);
+  --ring: oklch(0.8 0.2 120);
+  --chart-1: oklch(0.4 0.2 140);
+  --chart-2: oklch(0.3 0.2 140);
+  --chart-3: oklch(0.4 0.2 140);
+  --chart-4: oklch(0.4 0.2 140);
+  --chart-5: oklch(0.4 0.2 140);
+  --sidebar: oklch(0.8 0.2 140);
+  --sidebar-foreground: oklch(0.2 0.1 140);
+  --sidebar-primary: oklch(0.8 0.2 120);
+  --sidebar-primary-foreground: oklch(0.2 0.1 140);
+  --sidebar-accent: oklch(0.7 0.2 120);
+  --sidebar-accent-foreground: oklch(0.2 0.1 140);
+  --sidebar-border: oklch(0.4 0.2 140);
+  --sidebar-ring: oklch(0.8 0.2 120);
+}
+
+.dark.gameboy {
+  --primary: oklch(0.7 0.2 120);
+  --primary-foreground: oklch(0.2 0.1 140);
+  --background: oklch(0.2 0.1 140);
+  --foreground: oklch(0.8 0.2 120);
+  --card: oklch(0.2 0.1 140);
+  --card-foreground: oklch(0.8 0.2 120);
+  --popover: oklch(0.2 0.1 140);
+  --popover-foreground: oklch(0.8 0.2 120);
+  --secondary: oklch(0.3 0.1 140);
+  --secondary-foreground: oklch(0.8 0.2 120);
+  --muted: oklch(0.3 0.1 140);
+  --muted-foreground: oklch(0.7 0.2 120);
+  --accent: oklch(0.4 0.2 140);
+  --accent-foreground: oklch(0.8 0.2 120);
+  --destructive: oklch(0.5 0.3 30);
+  --border: oklch(0.4 0.2 140);
+  --input: oklch(0.4 0.2 140);
+  --ring: oklch(0.8 0.2 120);
+  --chart-1: oklch(0.4 0.2 140);
+  --chart-2: oklch(0.3 0.2 140);
+  --chart-3: oklch(0.4 0.2 140);
+  --chart-4: oklch(0.4 0.2 140);
+  --chart-5: oklch(0.4 0.2 140);
+  --sidebar: oklch(0.2 0.1 140);
+  --sidebar-foreground: oklch(0.8 0.2 120);
+  --sidebar-primary: oklch(0.4 0.2 140);
+  --sidebar-primary-foreground: oklch(0.8 0.2 120);
+  --sidebar-accent: oklch(0.3 0.1 140);
+  --sidebar-accent-foreground: oklch(0.8 0.2 120);
+  --sidebar-border: oklch(0.4 0.2 140);
+  --sidebar-ring: oklch(0.8 0.2 120);
+}
+
+/* 🟧 ATARI: Warm woodgrain and "Joystick Orange" */
+.atari {
+  --radius: 0rem;
+  --primary: oklch(0.5 0.2 60);
+  --primary-foreground: oklch(0 0 0);
+  --background: oklch(0.7 0 0);
+  --foreground: oklch(0 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0 0 0);
+  --secondary: oklch(0.7 0 0);
+  --secondary-foreground: oklch(0 0 0);
+  --muted: oklch(0.7 0 0);
+  --muted-foreground: oklch(0 0 0);
+  --accent: oklch(0.5 0.2 60);
+  --accent-foreground: oklch(1 0 0);
+  --destructive: oklch(0.5 0.3 20);
+  --border: oklch(0.5 0.2 60);
+  --input: oklch(0.7 0 0);
+  --ring: oklch(0.7 0 0);
+  --chart-1: oklch(0.7 0 0);
+  --chart-2: oklch(0.5 0.2 60);
+  --chart-3: oklch(0.9 0 0);
+  --chart-4: oklch(0.7 0 0);
+  --chart-5: oklch(0.5 0.3 280);
+  --sidebar: oklch(0.9 0 0);
+  --sidebar-foreground: oklch(0 0 0);
+  --sidebar-primary: oklch(0.5 0.3 280);
+  --sidebar-primary-foreground: oklch(0 0 0);
+  --sidebar-accent: oklch(0.6 0.3 30);
+  --sidebar-accent-foreground: oklch(1 0 0);
+  --sidebar-border: oklch(0.7 0 0);
+  --sidebar-ring: oklch(0.5 0.3 280);
+}
+
+.dark.atari {
+  --primary: oklch(0.4 0.2 60);
+  --primary-foreground: oklch(0.9 0 0);
+  --background: oklch(0.2 0 0);
+  --foreground: oklch(0.9 0 0);
+  --card: oklch(0.4 0 0);
+  --card-foreground: oklch(0.9 0 0);
+  --popover: oklch(0.4 0 0);
+  --popover-foreground: oklch(0.9 0 0);
+  --secondary: oklch(0.4 0 0);
+  --secondary-foreground: oklch(0.9 0 0);
+  --muted: oklch(0.4 0 0);
+  --muted-foreground: oklch(0.7 0 0);
+  --accent: oklch(0.4 0.2 60);
+  --accent-foreground: oklch(1 0 0);
+  --destructive: oklch(0.4 0.3 20);
+  --border: oklch(0.4 0 0);
+  --input: oklch(0.4 0 0);
+  --ring: oklch(0 0 0);
+  --chart-1: oklch(0 0 0);
+  --chart-2: oklch(0.4 0.2 60);
+  --chart-3: oklch(0.7 0 0);
+  --chart-4: oklch(0.4 0 0);
+  --chart-5: oklch(0.5 0.3 280);
+  --sidebar: oklch(0.4 0 0);
+  --sidebar-foreground: oklch(0.9 0 0);
+  --sidebar-primary: oklch(0.5 0.3 280);
+  --sidebar-primary-foreground: oklch(0.9 0 0);
+  --sidebar-accent: oklch(0.5 0.3 20);
+  --sidebar-accent-foreground: oklch(1 0 0);
+  --sidebar-border: oklch(0.4 0 0);
+  --sidebar-ring: oklch(0.5 0.3 280);
 }
 
 @layer base {
