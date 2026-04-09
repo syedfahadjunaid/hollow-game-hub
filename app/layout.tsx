@@ -45,6 +45,8 @@ export default function RootLayout({
             "gameboy-dark",
             "atari-light",
             "atari-dark",
+            "nintendo-light",
+            "nintendo-dark",
           ]}
         >
           <main className="grow">{children}</main>
