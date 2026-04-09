@@ -8,8 +8,6 @@ import {
   SelectValue,
 } from "@/components/ui/8bit/select";
 import { useRetroTheme } from "@/hooks/useRetroTheme";
-import { Sun, Moon } from "lucide-react";
-import { Switch } from "./switch";
 import { RetroModeSwitcher } from "../retro-mode-switcher";
 
 export default function ThemeSelector() {
@@ -35,6 +33,7 @@ export default function ThemeSelector() {
           <SelectItem value="sega">Sega</SelectItem>
           <SelectItem value="gameboy">Gameboy</SelectItem>
           <SelectItem value="atari">Atari</SelectItem>
+          <SelectItem value="nintendo">Nintendo</SelectItem>
         </SelectContent>
       </Select>
     </div>
