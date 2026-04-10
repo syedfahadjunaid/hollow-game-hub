@@ -47,22 +47,23 @@ export function LoginForm({
                     Forgot password?
                   </a>
                 </div>
-                <Input id="password" type="password" required />
+                <Input
+                  id="password"
+                  type="password"
+                  required
+                  placeholder="Enter your password"
+                />
               </div>
-              <Button type="submit" className="w-full">
-                Login
-              </Button>
-              <Button variant="outline" className="w-full">
-                Login with Google
-              </Button>
-              <Button variant="outline" className="w-full">
-                Login with Github
-              </Button>
-              <Button variant="outline" className="w-full">
-                Login with Microsoft
-              </Button>
+              <p className="text-xs md:text-base text-center text-secondary/90 dark:text-muted-foreground/90 drop-shadow-[0_2px_0_rgba(0,0,0,0.8)]">
+                OR
+              </p>
+              <div className="flex items-center justify-center gap-10">
+                <Button variant="outline">Google</Button>
+                <Button variant="outline">Github</Button>
+                <Button variant="outline">Microsoft</Button>
+              </div>
             </div>
-            <div className="mt-4 text-center text-xs">
+            <div className="mt-8 text-center text-xs">
               Don&apos;t have an account?{" "}
               <Link
                 href="/auth/sign-up"
