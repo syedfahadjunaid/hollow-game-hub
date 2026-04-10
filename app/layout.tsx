@@ -34,9 +34,8 @@ export default function RootLayout({
           attribute="class"
           defaultTheme="system"
           enableSystem
+          disableTransitionOnChange
           themes={[
-            "light",
-            "dark",
             "default-light",
             "default-dark",
             "sega-light",
