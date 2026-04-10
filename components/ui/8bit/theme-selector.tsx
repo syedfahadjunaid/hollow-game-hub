@@ -20,7 +20,16 @@ export default function ThemeSelector() {
 
   return (
     <div className="flex items-center gap-4">
-      <RetroModeSwitcher toggleMode={toggleMode} />
+      {/* <RetroModeSwitcher toggleMode={toggleMode} /> */}
+      <Select defaultValue={currentMode} onValueChange={toggleMode}>
+        <SelectTrigger className="w-45">
+          <SelectValue placeholder="Light/Dark" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="light">Light</SelectItem>
+          <SelectItem value="dark">Dark</SelectItem>
+        </SelectContent>
+      </Select>
       <Select
         defaultValue={currentConsole}
         onValueChange={(val) => updateTheme(val, currentMode)}
