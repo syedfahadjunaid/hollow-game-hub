@@ -20,7 +20,7 @@ export function SignUpForm({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl">Login</CardTitle>
+          <CardTitle className="text-2xl">Sign Up</CardTitle>
           <CardDescription className="text-xs">
             Enter your email below to login to your account
           </CardDescription>
@@ -28,6 +28,15 @@ export function SignUpForm({
         <CardContent>
           <form>
             <div className="flex flex-col gap-6">
+              <div className="grid gap-2">
+                <Label htmlFor="username">Username</Label>
+                <Input
+                  id="username"
+                  type="text"
+                  placeholder="Enter your usernam"
+                  required
+                />
+              </div>
               <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
@@ -40,35 +49,42 @@ export function SignUpForm({
               <div className="grid gap-2">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
                   <Label htmlFor="password">Password</Label>
-                  <a
-                    href="#"
-                    className="inline-block text-xs underline-offset-4 hover:underline"
-                  >
-                    Forgot password?
-                  </a>
                 </div>
-                <Input id="password" type="password" required />
+                <Input
+                  id="password"
+                  type="password"
+                  required
+                  placeholder="Enter your password"
+                />
+              </div>
+              <div className="grid gap-2">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
+                  <Label htmlFor="confirmPassword">Confirm Password</Label>
+                </div>
+                <Input
+                  id="confirmPassword"
+                  type="password"
+                  required
+                  placeholder="Confirm your password"
+                />
               </div>
               <Button type="submit" className="w-full">
-                Login
+                Sign Up
               </Button>
-              <Button variant="outline" className="w-full">
-                Login with Google
-              </Button>
-              <Button variant="outline" className="w-full">
-                Login with Github
-              </Button>
-              <Button variant="outline" className="w-full">
-                Login with Microsoft
-              </Button>
+
+              <p className="text-xs md:text-base text-center text-secondary/90 dark:text-muted-foreground/90 drop-shadow-[0_2px_0_rgba(0,0,0,0.8)]">
+                OR
+              </p>
+              <div className="flex items-center justify-center gap-10">
+                <Button variant="outline">Google</Button>
+                <Button variant="outline">Github</Button>
+                <Button variant="outline">Microsoft</Button>
+              </div>
             </div>
-            <div className="mt-4 text-center text-xs">
-              Don&apos;t have an account?{" "}
-              <Link
-                href="/auth/sign-up"
-                className="underline underline-offset-4"
-              >
-                Sign up
+            <div className="mt-8 text-center text-xs">
+              Already have an account?{" "}
+              <Link href="/auth/login" className="underline underline-offset-4">
+                Login
               </Link>
             </div>
           </form>
