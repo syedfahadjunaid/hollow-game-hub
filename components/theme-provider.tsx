@@ -50,7 +50,9 @@ function ThemeHotkey() {
         return;
       }
 
-      setTheme(resolvedTheme === "dark" ? "light" : "dark");
+      setTheme(
+        resolvedTheme === "default-dark" ? "default-light" : "default-dark",
+      );
     }
 
     window.addEventListener("keydown", onKeyDown);
