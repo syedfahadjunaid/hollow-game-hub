@@ -4,10 +4,10 @@ import { apiRequest } from "@/lib/api-client";
 import { redirect } from "next/navigation";
 
 interface IUserData {
-  email: string;
-  displayName: string;
-  password: string;
-  role: string;
+  email?: string;
+  displayName?: string;
+  password?: string;
+  role?: string;
 }
 export async function registerUserAction(userData: IUserData) {
   try {
@@ -43,16 +43,11 @@ export async function loginUserAction(userData: IUserData) {
       }),
     });
 
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.message || "Signup failed");
+    if (!response.token) {
+      throw new Error("Login failed");
     }
-
-    // return { success: true, user: data.user };
-
-    redirect(`/main-menu/${data.token}`);
+    return { success: true, message: "Login Success", data: response.token };
   } catch (error: any) {
-    return { success: false, error: error.message };
+    return { success: false, message: "Login Failed", error: error.message };
   }
 }
