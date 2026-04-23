@@ -29,9 +29,9 @@ type Props = React.ComponentPropsWithoutRef<"div">;
 export function LoginForm({ className, ...props }: Props) {
   const router = useRouter();
 
-  function encode(value: string) {
-    return encodeURIComponent(value);
-  }
+  // function encode(value: string) {
+  //   return encodeURIComponent(value);
+  // }
 
   async function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -47,19 +47,16 @@ export function LoginForm({ className, ...props }: Props) {
             <div
               className={`${
                 t.visible ? "animate-custom-enter" : "animate-custom-leave"
-              } max-w-md w-full bg-white shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
+              }  items-center shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
             >
-              <Alert>
-                <AlertTitle>Heads up!</AlertTitle>
+              <Alert variant="default">
+                <AlertTitle>Warning!</AlertTitle>
                 <AlertDescription>{response.message}</AlertDescription>
               </Alert>
-              <div className="flex border-l border-gray-200">
-                <button
-                  onClick={() => toast.dismiss(t.id)}
-                  className="w-full border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                >
-                  Close
-                </button>
+              <div className="flex">
+                <Button onClick={() => toast.dismiss(t.id)} className="">
+                  X
+                </Button>
               </div>
             </div>
           ));
@@ -69,19 +66,16 @@ export function LoginForm({ className, ...props }: Props) {
             <div
               className={`${
                 t.visible ? "animate-custom-enter" : "animate-custom-leave"
-              } max-w-md w-full bg-white shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
+              }  items-center shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
             >
               <Alert variant="destructive">
-                <AlertTitle>Heads up!</AlertTitle>
+                <AlertTitle>Warning!</AlertTitle>
                 <AlertDescription>{response.message}</AlertDescription>
               </Alert>
-              <div className="flex border-l border-gray-200">
-                <button
-                  onClick={() => toast.dismiss(t.id)}
-                  className="w-full border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                >
-                  Close
-                </button>
+              <div className="flex">
+                <Button onClick={() => toast.dismiss(t.id)} className="">
+                  X
+                </Button>
               </div>
             </div>
           ));
@@ -91,22 +85,16 @@ export function LoginForm({ className, ...props }: Props) {
           <div
             className={`${
               t.visible ? "animate-custom-enter" : "animate-custom-leave"
-            } max-w-md w-full bg-white shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
+            }  items-center shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
           >
             <Alert variant="destructive">
-              <AlertTitle>Heads up!</AlertTitle>
-              <AlertDescription>
-                You can add components and dependencies to your app using the
-                cli.
-              </AlertDescription>
+              <AlertTitle>Warning!</AlertTitle>
+              <AlertDescription>{e.message}</AlertDescription>
             </Alert>
-            <div className="flex border-l border-gray-200">
-              <button
-                onClick={() => toast.dismiss(t.id)}
-                className="w-full border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              >
-                Close
-              </button>
+            <div className="flex">
+              <Button onClick={() => toast.dismiss(t.id)} className="">
+                X
+              </Button>
             </div>
           </div>
         ));
