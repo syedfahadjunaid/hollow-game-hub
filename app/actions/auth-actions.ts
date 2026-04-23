@@ -21,15 +21,17 @@ export async function registerUserAction(userData: IUserData) {
       }),
     });
 
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.message || "Signup failed");
+    if (!response) {
+      throw new Error("Oops! There might be something missing");
     }
 
-    return { success: true, user: data.user };
+    return {
+      success: true,
+      message: "Player registered successfully",
+      // user: data.user,
+    };
   } catch (error: any) {
-    return { success: false, error: error.message };
+    return { success: false, message: error.message, error: error.message };
   }
 }
 
@@ -44,10 +46,14 @@ export async function loginUserAction(userData: IUserData) {
     });
 
     if (!response.token) {
-      throw new Error("Login failed");
+      throw new Error("Oops! There might be something missing");
     }
-    return { success: true, message: "Login Success", data: response.token };
+    return {
+      success: true,
+      message: "Welcome back player",
+      data: response.token,
+    };
   } catch (error: any) {
-    return { success: false, message: "Login Failed", error: error.message };
+    return { success: false, message: error.message, error: error.message };
   }
 }
