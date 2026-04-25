@@ -1,7 +1,7 @@
-import { RetroModeSwitcher } from "@/components/ui/retro-mode-switcher";
 import React from "react";
 import { Card } from "@/components/ui/8bit/card";
-import ThemeSelector from "@/components/ui/8bit/theme-selector";
+
+import Header from "@/components/Header";
 
 export default function layout({
   children,
@@ -11,14 +11,7 @@ export default function layout({
   return (
     <div className="flex h-screen flex-col overflow-hidden">
       {/* Header */}
-      <Card className="z-10 bg-background shadow-sm">
-        <div className="flex h-16 items-center justify-between px-6">
-          <h1 className="text-xl font-semibold tracking-tight">
-            Hollow Game Hub
-          </h1>
-          <ThemeSelector />
-        </div>
-      </Card>
+      <Header />
 
       {/* Main Content Area */}
       <main className="flex-1 overflow-y-auto bg-muted/20">
