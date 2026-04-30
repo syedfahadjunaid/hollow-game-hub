@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 
 import { Toaster } from "react-hot-toast";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -51,8 +52,10 @@ export default function RootLayout({
           ]}
         >
           <main className="grow">
-            {children}
-            <Toaster position="bottom-right" reverseOrder={false} />
+            <TooltipProvider>
+              {children}
+              <Toaster position="bottom-right" reverseOrder={false} />
+            </TooltipProvider>
           </main>
         </ThemeProvider>
       </body>
