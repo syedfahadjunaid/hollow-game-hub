@@ -38,7 +38,7 @@ export function SignUpForm({
     return null;
   }
 
-  const customToast = (t, message) => (
+  const customToast = (t, message: string) => (
     <div
       className={`${
         t.visible ? "animate-custom-enter" : "animate-custom-leave"
