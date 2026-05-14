@@ -33,6 +33,24 @@ export function LoginForm({ className, ...props }: Props) {
   //   return encodeURIComponent(value);
   // }
 
+  const customToast = (t, message: string, isError?: boolean) => (
+    <div
+      className={`${
+        t.visible ? "animate-custom-enter" : "animate-custom-leave"
+      }  items-center shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
+    >
+      <Alert variant={isError ? "destructive" : "default"}>
+        <AlertTitle>{isError ? "Warning!" : "Success"}</AlertTitle>
+        <AlertDescription>{message}</AlertDescription>
+      </Alert>
+      <div className="flex">
+        <Button onClick={() => toast.dismiss(t.id)} className="">
+          X
+        </Button>
+      </div>
+    </div>
+  );
+
   async function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
@@ -43,61 +61,13 @@ export function LoginForm({ className, ...props }: Props) {
       try {
         const response = await loginUserAction({ email, password });
         if (response?.success) {
-          toast.custom((t) => (
-            <div
-              className={`${
-                t.visible ? "animate-custom-enter" : "animate-custom-leave"
-              }  items-center shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
-            >
-              <Alert variant="default">
-                <AlertTitle>Warning!</AlertTitle>
-                <AlertDescription>{response.message}</AlertDescription>
-              </Alert>
-              <div className="flex">
-                <Button onClick={() => toast.dismiss(t.id)} className="">
-                  X
-                </Button>
-              </div>
-            </div>
-          ));
+          toast.custom((t) => customToast(t, response.message));
           router.push("/main-menu");
         } else if (!response.success) {
-          toast.custom((t) => (
-            <div
-              className={`${
-                t.visible ? "animate-custom-enter" : "animate-custom-leave"
-              }  items-center shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
-            >
-              <Alert variant="destructive">
-                <AlertTitle>Warning!</AlertTitle>
-                <AlertDescription>{response.message}</AlertDescription>
-              </Alert>
-              <div className="flex">
-                <Button onClick={() => toast.dismiss(t.id)} className="">
-                  X
-                </Button>
-              </div>
-            </div>
-          ));
+          toast.custom((t) => customToast(t, response.message, true));
         }
       } catch (e: any) {
-        toast.custom((t) => (
-          <div
-            className={`${
-              t.visible ? "animate-custom-enter" : "animate-custom-leave"
-            }  items-center shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
-          >
-            <Alert variant="destructive">
-              <AlertTitle>Warning!</AlertTitle>
-              <AlertDescription>{e.message}</AlertDescription>
-            </Alert>
-            <div className="flex">
-              <Button onClick={() => toast.dismiss(t.id)} className="">
-                X
-              </Button>
-            </div>
-          </div>
-        ));
+        toast.custom((t) => customToast(t, e.message, true));
       }
     }
   }
