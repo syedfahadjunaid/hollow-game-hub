@@ -38,14 +38,14 @@ export function SignUpForm({
     return null;
   }
 
-  const customToast = (t, message: string) => (
+  const customToast = (t, message: string, isError?: boolean) => (
     <div
       className={`${
         t.visible ? "animate-custom-enter" : "animate-custom-leave"
       }  items-center shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
     >
-      <Alert variant="destructive">
-        <AlertTitle>Warning!</AlertTitle>
+      <Alert variant={isError ? "destructive" : "default"}>
+        <AlertTitle>{isError ? "Warning!" : "Success"}</AlertTitle>
         <AlertDescription>{message}</AlertDescription>
       </Alert>
       <div className="flex">
@@ -67,13 +67,13 @@ export function SignUpForm({
     const validation = validatePasswords(password, confirmPassword);
     if (validation) {
       setError(validation);
-      toast.custom((t) => customToast(t, validation));
+      toast.custom((t) => customToast(t, validation, true));
       return;
     }
 
     if (!email || !displayName) {
       setError("Please fill all fields");
-      toast.custom((t) => customToast(t, "Please fill all fields"));
+      toast.custom((t) => customToast(t, "Please fill all fields", true));
       return;
     }
 
@@ -86,16 +86,16 @@ export function SignUpForm({
       });
       if (response?.success) {
         toast.custom((t) => customToast(t, response.message));
-        // router.push("/main-menu");
+        router.push("/auth/login");
       } else {
         const msg = response?.message ?? "Registration failed";
         setError(msg);
-        toast.custom((t) => customToast(t, msg));
+        toast.custom((t) => customToast(t, msg, true));
       }
     } catch (e: any) {
       const msg = e?.message ?? "Registration failed";
       setError(msg);
-      toast.custom((t) => customToast(t, msg));
+      toast.custom((t) => customToast(t, msg, true));
     } finally {
       setLoading(false);
     }
