@@ -64,8 +64,6 @@ export function SignUpForm({
     const email = String(fd.get("email") || "");
     const displayName = String(fd.get("username") || "");
 
-    console.log(displayName);
-
     const validation = validatePasswords(password, confirmPassword);
     if (validation) {
       setError(validation);
