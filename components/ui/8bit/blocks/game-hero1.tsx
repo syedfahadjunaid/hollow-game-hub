@@ -27,21 +27,19 @@ export default function GameHero1({
   subtitle = "v2.0 — Now Live",
   description = "Your product is ready for battle. Ship it before the competition respawns.",
   actions = [
-    { label: "DEPLOY NOW", variant: "default", href: "/docs" },
-    { label: "VIEW ARSENAL", variant: "outline", href: "/v2" },
+    { label: "AI CHAT NOW", variant: "default", href: "/main-menu/chat" },
+    { label: "VIEW DASHBOARD", variant: "outline", href: "/v2" },
   ],
   xpLabel = "XP to Next Level",
   xpValue = 72,
   className,
 }: GameHero1Props) {
   return (
-    <section
-      className={cn("relative w-full px-4 py-16 md:py-24", className)}
-    >
+    <section className={cn("relative w-full px-4 py-16 md:py-24", className)}>
       <div className="mx-auto max-w-2xl text-center">
         {subtitle && (
           <div className="mb-6">
-            <Badge >{subtitle}</Badge>
+            <Badge>{subtitle}</Badge>
           </div>
         )}
 
