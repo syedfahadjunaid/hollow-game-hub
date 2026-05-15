@@ -27,8 +27,8 @@ export default function GameHero1({
   subtitle = "v2.0 — Now Live",
   description = "Your product is ready for battle. Ship it before the competition respawns.",
   actions = [
-    { label: "AI CHAT NOW", variant: "default", href: "/main-menu/chat" },
-    { label: "VIEW DASHBOARD", variant: "outline", href: "/v2" },
+    { label: "AI CHAT NOW", variant: "default", href: "/club/chat" },
+    { label: "VIEW DASHBOARD", variant: "outline", href: "/club/dashboard" },
   ],
   xpLabel = "XP to Next Level",
   xpValue = 72,
