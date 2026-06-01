@@ -3,7 +3,7 @@ import { Card } from "./ui/8bit/card";
 import ThemeSelector from "./ui/8bit/theme-selector";
 
 interface IHeaderProps {
-  showProfile: boolean;
+  showProfile?: boolean;
 }
 
 export default function Header({ showProfile }: IHeaderProps) {
