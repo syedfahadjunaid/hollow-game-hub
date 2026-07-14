@@ -35,12 +35,12 @@ const LandingPage = () => {
   return (
     <div
       ref={containerRef}
-      className="w-full h-screen flex items-center justify-center gap-6 overflow-hidden"
+      className="w-full min-h-full flex flex-col lg:flex-row items-center justify-center gap-6 lg:gap-10 overflow-x-hidden py-4"
     >
-      <div ref={leftPanel} className="w-1/2 opacity-0">
+      <div ref={leftPanel} className="w-full lg:w-1/2 opacity-0">
         <MainMenu className="w-full h-full" />
       </div>
-      <div ref={rightPanel} className="w-1/2 opacity-0">
+      <div ref={rightPanel} className="w-full lg:w-1/2 opacity-0">
         <GameHero1 title="Welcome to AI Hollow Game Club" />
       </div>
     </div>
