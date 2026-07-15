@@ -1,4 +1,5 @@
 import React from "react";
+import { IconDeviceGamepad2 } from "@tabler/icons-react";
 import { Card } from "@/components/ui/8bit/card";
 
 import Header from "@/components/Header";
@@ -22,15 +23,25 @@ export default function layout({
 
       {/* Footer */}
       <Card className="border-t bg-background">
-        <div className="flex flex-wrap items-center justify-between gap-2 px-4 py-2 sm:px-6">
-          <p className="text-xs text-muted-foreground">
-            Hollow Game Hub 2026, All Rights Reserved
+        <div className="flex flex-col items-center justify-between gap-2 px-4 py-3 text-center sm:flex-row sm:px-6 sm:text-left">
+          <p className="flex items-center gap-2 text-[10px] text-muted-foreground sm:text-xs">
+            <IconDeviceGamepad2 className="size-3.5 shrink-0" />
+            <span>&copy; 2026 Hollow Game Hub — All Rights Reserved</span>
           </p>
-          <div className="flex gap-4 text-xs text-muted-foreground">
-            <a href="#" className="hover:underline">
+          <div className="flex items-center gap-3 text-[10px] text-muted-foreground sm:gap-4 sm:text-xs">
+            <a
+              href="#"
+              className="underline-offset-4 transition-colors hover:text-foreground hover:underline"
+            >
               Privacy
             </a>
-            <a href="#" className="hover:underline">
+            <span aria-hidden="true" className="text-muted-foreground/40">
+              &bull;
+            </span>
+            <a
+              href="#"
+              className="underline-offset-4 transition-colors hover:text-foreground hover:underline"
+            >
               Terms
             </a>
           </div>
