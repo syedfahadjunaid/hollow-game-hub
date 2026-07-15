@@ -6,7 +6,7 @@ import {
 
 export default function HeaderProfile() {
   return (
-    <Avatar className="size-15">
+    <Avatar className="size-10 shrink-0 transition-transform hover:scale-105 sm:size-12">
       <AvatarImage
         src="https://8bitcn.com/images/pixelized-8bitcnorc.jpg"
         alt="@8bitcn"
