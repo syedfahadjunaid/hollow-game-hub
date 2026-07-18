@@ -193,8 +193,8 @@ export function SignUpForm({
         setError(msg);
         toast.custom((t) => customToast(t, msg, true));
       }
-    } catch (e: any) {
-      const msg = e?.message ?? "Registration failed";
+    } catch (e: unknown) {
+      const msg = e instanceof Error ? e.message : "Registration failed";
       setError(msg);
       toast.custom((t) => customToast(t, msg, true));
     } finally {
