@@ -1,3 +1,22 @@
+import { ChatShell } from "./components/ChatShell";
+
+export const metadata = {
+  title: "GG — Gaming Assistant",
+};
+
 export default function ChatPage() {
-  return <div>CHat</div>;
+  return (
+    <div className="flex h-[calc(100vh-10rem)] w-full flex-col">
+      <div className="mb-3 shrink-0">
+        <h1 className="text-lg font-semibold tracking-tight md:text-xl">
+          Gaming Assistant
+        </h1>
+        <p className="mt-1 text-xs text-muted-foreground md:text-sm">
+          Ask GG about mechanics, builds, lore and comparisons.
+        </p>
+      </div>
+
+      <ChatShell />
+    </div>
+  );
 }
