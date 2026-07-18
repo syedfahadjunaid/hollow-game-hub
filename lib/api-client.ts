@@ -1,19 +1,89 @@
-const BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL || "https://api.your-backend.com";
+import { getAccessToken, getRefreshToken, setSession } from "@/lib/auth/session";
 
-export async function apiRequest(endpoint: string, options: RequestInit = {}) {
+const BASE_URL =
+  process.env.API_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+
+export class ApiError extends Error {
+  status: number;
+
+  constructor(status: number, message: string) {
+    super(message);
+    this.name = "ApiError";
+    this.status = status;
+  }
+}
+
+async function readError(res: Response) {
+  try {
+    const body = await res.json();
+    return new ApiError(res.status, body?.message || "API request failed");
+  } catch {
+    return new ApiError(res.status, res.statusText || "API request failed");
+  }
+}
+
+/**
+ * Exchange the refresh token for a new access token.
+ * Returns the new access token, or null if the session is unrecoverable.
+ *
+ * The backend reads the refresh token from its own cookie OR from the request
+ * body. We call it server-to-server, so that cookie isn't in play — we send the
+ * value we stored ourselves in the body.
+ */
+export async function refreshAccessToken(): Promise<string | null> {
+  const refreshToken = await getRefreshToken();
+  if (!refreshToken) return null;
+
+  const res = await fetch(`${BASE_URL}/api/auth/refresh`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ refreshToken }),
+    cache: "no-store",
+  });
+
+  if (!res.ok) return null;
+
+  const data = await res.json();
+  if (!data?.accessToken) return null;
+
+  await setSession(data.accessToken, data.refreshToken);
+  return data.accessToken as string;
+}
+
+/**
+ * Authenticated fetch against the backend. Server-only (reads httpOnly cookies).
+ * On 401 it transparently refreshes once and retries.
+ */
+export async function apiRequest(
+  endpoint: string,
+  options: RequestInit = {},
+  { retryOn401 = true }: { retryOn401?: boolean } = {}
+) {
+  const token = await getAccessToken();
+
   const res = await fetch(`${BASE_URL}${endpoint}`, {
     ...options,
     headers: {
       "Content-Type": "application/json",
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
       ...options.headers,
     },
+    cache: "no-store",
   });
 
-  if (!res.ok) {
-    const error = await res.json();
-    throw new Error(error.message || "API request failed");
+  if (res.status === 401 && retryOn401) {
+    const fresh = await refreshAccessToken();
+    if (fresh) {
+      return apiRequest(endpoint, options, { retryOn401: false });
+    }
   }
+
+  if (!res.ok) throw await readError(res);
+
+  // 204 No Content (e.g. DELETE conversation, logout)
+  if (res.status === 204 || res.headers.get("content-length") === "0") return null;
 
   return res.json();
 }
+
+export { BASE_URL };
