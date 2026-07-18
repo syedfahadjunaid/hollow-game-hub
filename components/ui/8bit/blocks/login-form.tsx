@@ -157,13 +157,14 @@ export function LoginForm({ className, ...props }: Props) {
       const response = await loginUserAction({ email, password });
       if (response?.success) {
         toast.custom((t) => customToast(t, response.message));
-        router.push("/main-menu");
+        router.push("/club/main-menu");
       } else {
         toast.custom((t) => customToast(t, response.message, true));
         setLoading(false);
       }
-    } catch (err: any) {
-      toast.custom((t) => customToast(t, err.message, true));
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Login failed";
+      toast.custom((t) => customToast(t, message, true));
       setLoading(false);
     }
   }
