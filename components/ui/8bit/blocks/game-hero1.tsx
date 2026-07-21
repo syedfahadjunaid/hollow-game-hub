@@ -35,26 +35,28 @@ export default function GameHero1({
   className,
 }: GameHero1Props) {
   return (
-    <section className={cn("relative w-full px-4 py-16 md:py-24", className)}>
+    <section className={cn("relative w-full px-4 py-6 md:py-10", className)}>
       <div className="mx-auto max-w-2xl text-center">
         {subtitle && (
-          <div className="mb-6">
+          <div className="mb-4">
             <Badge>{subtitle}</Badge>
           </div>
         )}
 
-        <h1 className="retro mb-4 font-bold text-3xl tracking-tight md:text-5xl">
+        {/* Press Start 2P is a very tall/wide pixel font — keep the display
+            sizes modest so the hero fits a laptop viewport without scrolling. */}
+        <h1 className="retro mb-3 font-bold text-lg tracking-tight sm:text-xl md:text-3xl">
           {title}
         </h1>
 
         {description && (
-          <p className="mx-auto mb-8 max-w-lg text-muted-foreground retro text-[9px] leading-relaxed">
+          <p className="mx-auto mb-5 max-w-lg text-muted-foreground retro text-[9px] leading-relaxed">
             {description}
           </p>
         )}
 
         {actions.length > 0 && (
-          <div className="mb-8 flex flex-wrap justify-center gap-4">
+          <div className="mb-5 flex flex-wrap justify-center gap-4">
             {actions.map((action) =>
               action.href ? (
                 <Button asChild key={action.label} variant={action.variant}>
