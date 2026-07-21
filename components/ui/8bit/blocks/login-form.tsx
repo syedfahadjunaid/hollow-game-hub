@@ -199,7 +199,7 @@ export function LoginForm({ className, ...props }: Props) {
 
         <CardContent className="relative z-20">
           <form onSubmit={handleSubmit}>
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-4">
               <div className="js-field grid gap-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
@@ -276,11 +276,11 @@ export function LoginForm({ className, ...props }: Props) {
               </div>
             </div>
 
-            <p className="js-coin mt-6 text-center text-[10px] tracking-widest text-muted-foreground">
+            <p className="js-coin mt-4 text-center text-[10px] tracking-widest text-muted-foreground">
               ★ INSERT COIN TO CONTINUE ★
             </p>
 
-            <div className="js-footer mt-4 text-center text-xs">
+            <div className="js-footer mt-3 text-center text-xs">
               Don&apos;t have an account?{" "}
               <Link
                 href="/auth/sign-up"
