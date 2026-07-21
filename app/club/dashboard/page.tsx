@@ -1,12 +1,4 @@
-import Link from "next/link";
-import {
-  IconDeviceGamepad2,
-  IconLayoutDashboard,
-  IconMessageCircle,
-  IconSettings,
-  IconTrophy,
-  IconUsers,
-} from "@tabler/icons-react";
+import { IconDeviceGamepad2 } from "@tabler/icons-react";
 import { DashboardHeader } from "@/components/dashboard-header";
 import { DataTable } from "@/components/data-table";
 import { SectionCards } from "@/components/section-cards";
@@ -25,46 +17,11 @@ import {
   SidebarGroupLabel,
   SidebarHeader,
   SidebarInset,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
   SidebarProvider,
 } from "@/components/ui/sidebar";
 
+import { DashboardNav } from "./components/DashboardNav";
 import data from "./data.json";
-
-const items = [
-  {
-    title: "Main Menu",
-    url: "/club/main-menu",
-    icon: IconDeviceGamepad2,
-  },
-  {
-    title: "Dashboard",
-    url: "/club/dashboard",
-    icon: IconLayoutDashboard,
-  },
-  {
-    title: "Chat",
-    url: "/club/chat",
-    icon: IconMessageCircle,
-  },
-  {
-    title: "Leaderboard",
-    url: "#",
-    icon: IconTrophy,
-  },
-  {
-    title: "Players",
-    url: "#",
-    icon: IconUsers,
-  },
-  {
-    title: "Settings",
-    url: "#",
-    icon: IconSettings,
-  },
-];
 
 export default function Page() {
   return (
@@ -92,18 +49,7 @@ export default function Page() {
             <SidebarGroup>
               <SidebarGroupLabel>Navigation</SidebarGroupLabel>
               <SidebarGroupContent>
-                <SidebarMenu>
-                  {items.map((item) => (
-                    <SidebarMenuItem key={item.title}>
-                      <SidebarMenuButton asChild>
-                        <Link href={item.url}>
-                          <item.icon />
-                          <span>{item.title}</span>
-                        </Link>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  ))}
-                </SidebarMenu>
+                <DashboardNav />
               </SidebarGroupContent>
             </SidebarGroup>
           </SidebarContent>
