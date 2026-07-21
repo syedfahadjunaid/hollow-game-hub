@@ -487,5 +487,10 @@
   }
   html {
     @apply font-sans;
+    /* Render the app at 80% scale. Tailwind sizes type and spacing in rem,
+       so shrinking the root font size scales the whole UI proportionally —
+       unlike `zoom`, this leaves vh-based layout heights (h-screen, the chat
+       shell) correct instead of leaving a gap at the bottom. */
+    font-size: 80%;
   }
 }
