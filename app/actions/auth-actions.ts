@@ -2,6 +2,11 @@
 
 import { apiRequest, ApiError } from "@/lib/api-client";
 import { clearSession, setSession } from "@/lib/auth/session";
+import {
+  DEV_ACCESS_TOKEN,
+  DEV_REFRESH_TOKEN,
+  isDevLogin,
+} from "@/lib/auth/dev-login";
 
 interface IUserData {
   email?: string;
@@ -55,6 +60,15 @@ export async function registerUserAction(userData: IUserData) {
 }
 
 export async function loginUserAction(userData: IUserData) {
+  // Dev-only test account — no-ops in production (see lib/auth/dev-login.ts).
+  if (isDevLogin(userData.email, userData.password)) {
+    await setSession(DEV_ACCESS_TOKEN, DEV_REFRESH_TOKEN);
+    return {
+      success: true,
+      message: "Welcome back player (dev login)",
+    };
+  }
+
   try {
     const response: IAuthResponse = await apiRequest("/api/auth/login", {
       method: "POST",
