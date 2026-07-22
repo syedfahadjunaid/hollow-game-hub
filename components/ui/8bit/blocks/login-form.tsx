@@ -18,6 +18,11 @@ import { useLayoutEffect, useRef, useState } from "react";
 import toast, { type Toast } from "react-hot-toast";
 import { gsap } from "gsap";
 import { loginUserAction } from "@/app/actions/auth-actions";
+import {
+  DEV_LOGIN_EMAIL,
+  DEV_LOGIN_ENABLED,
+  DEV_LOGIN_PASSWORD,
+} from "@/lib/auth/dev-login";
 
 import {
   Alert,
@@ -126,6 +131,19 @@ export function LoginForm({ className, ...props }: Props) {
     gsap.to(frame, { scale: 1, duration: 0.25, ease: "power2.out" });
   };
 
+  /**
+   * The email/password inputs are uncontrolled and the form reads FormData
+   * straight off the DOM, so assigning `.value` here is enough.
+   */
+  function fillDevCredentials() {
+    const email = document.getElementById("email") as HTMLInputElement | null;
+    const password = document.getElementById(
+      "password"
+    ) as HTMLInputElement | null;
+    if (email) email.value = DEV_LOGIN_EMAIL;
+    if (password) password.value = DEV_LOGIN_PASSWORD;
+  }
+
   const customToast = (t: Toast, message: string, isError?: boolean) => (
     <div
       className={`${
@@ -198,6 +216,23 @@ export function LoginForm({ className, ...props }: Props) {
         </CardHeader>
 
         <CardContent className="relative z-20">
+          {/* Dev-only test account. Compiled out of production builds. */}
+          {DEV_LOGIN_ENABLED && (
+            <div className="mb-4 border-2 border-dashed border-foreground/40 p-2 text-[10px] leading-relaxed">
+              <p className="font-semibold">DEV TEST LOGIN</p>
+              <p className="text-muted-foreground">
+                {DEV_LOGIN_EMAIL} / {DEV_LOGIN_PASSWORD}
+              </p>
+              <button
+                type="button"
+                onClick={fillDevCredentials}
+                className="mt-1 underline underline-offset-2 hover:text-foreground"
+              >
+                Fill credentials
+              </button>
+            </div>
+          )}
+
           <form onSubmit={handleSubmit}>
             <div className="flex flex-col gap-4">
               <div className="js-field grid gap-2">
