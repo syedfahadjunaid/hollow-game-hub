@@ -303,6 +303,11 @@ export function LoginForm({ className, ...props }: Props) {
                     type="button"
                     variant="outline"
                     className="js-social"
+                    onClick={() => {
+                      const provider = label.toLowerCase();
+                      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+                      window.location.href = `${apiUrl}/api/auth/oauth/${provider}`;
+                    }}
                   >
                     <Icon className="size-4" />
                     {label}
