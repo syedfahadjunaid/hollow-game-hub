@@ -5,20 +5,30 @@ const BASE_URL =
 
 export class ApiError extends Error {
   status: number;
+  rateLimitReset: number | null;
 
-  constructor(status: number, message: string) {
+  constructor(status: number, message: string, rateLimitReset: number | null = null) {
     super(message);
     this.name = "ApiError";
     this.status = status;
+    this.rateLimitReset = rateLimitReset;
   }
 }
 
 async function readError(res: Response) {
+  let rateLimitReset: number | null = null;
+  const resetHeader = res.headers.get("RateLimit-Reset") || res.headers.get("X-RateLimit-Reset");
+  if (resetHeader) {
+    const parsed = parseInt(resetHeader, 10);
+    if (!isNaN(parsed)) rateLimitReset = parsed;
+  }
+
   try {
     const body = await res.json();
-    return new ApiError(res.status, body?.message || "API request failed");
+    const message = body?.error?.message || body?.message || "API request failed";
+    return new ApiError(res.status, message, rateLimitReset);
   } catch {
-    return new ApiError(res.status, res.statusText || "API request failed");
+    return new ApiError(res.status, res.statusText || "API request failed", rateLimitReset);
   }
 }
 
