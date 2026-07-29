@@ -94,6 +94,22 @@ export async function loginUserAction(userData: IUserData) {
   }
 }
 
+export async function getCurrentUserAction() {
+  try {
+    const response = await apiRequest("/api/auth/me", { method: "GET" });
+    return {
+      success: true,
+      user: response?.user || response || null,
+    };
+  } catch (error: unknown) {
+    return {
+      success: false,
+      user: null,
+      error: errorMessage(error),
+    };
+  }
+}
+
 export async function logoutAction() {
   try {
     await apiRequest("/api/auth/logout", { method: "POST" });
