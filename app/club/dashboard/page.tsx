@@ -1,6 +1,5 @@
 import { IconDeviceGamepad2 } from "@tabler/icons-react";
 import { DashboardHeader } from "@/components/dashboard-header";
-import { DataTable } from "@/components/data-table";
 import { SectionCards } from "@/components/section-cards";
 import ChartBarMultiple from "@/components/ui/8bit/blocks/chart-bar";
 import {
@@ -21,7 +20,7 @@ import {
 } from "@/components/ui/sidebar";
 
 import { DashboardNav } from "./components/DashboardNav";
-import data from "./data.json";
+import { LiveLeaderboards } from "./components/LiveLeaderboards";
 
 export default function Page() {
   return (
@@ -64,7 +63,7 @@ export default function Page() {
                     Player Dashboard
                   </h1>
                   <p className="mt-1 text-xs text-muted-foreground md:text-sm">
-                    Hub activity and season performance at a glance.
+                    Hub activity, season performance, and live global rankings at a glance.
                   </p>
                 </div>
                 <SectionCards />
@@ -79,7 +78,9 @@ export default function Page() {
                   </Card>
                 </div>
 
-                <DataTable data={data} />
+                <div className="px-4 lg:px-6">
+                  <LiveLeaderboards />
+                </div>
               </div>
             </div>
           </div>
