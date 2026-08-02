@@ -6,9 +6,9 @@ import {
   IconDeviceGamepad2,
   IconLayoutDashboard,
   IconMessageCircle,
-  IconSettings,
   IconTrophy,
-  IconUsers,
+  IconSwords,
+  IconAward,
 } from "@tabler/icons-react";
 
 import {
@@ -17,22 +17,13 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 
-/**
- * Rendered as a Client Component on purpose.
- *
- * `SidebarMenuButton asChild` uses a Slot that clones its child. When the
- * `<Link>` child is created in a Server Component and passed across the RSC
- * boundary, that clone doesn't survive hydration and the menu items render as
- * empty <li>s. Building the items here keeps them client-side and intact.
- */
-
 const items = [
   { title: "Main Menu", url: "/club/main-menu", icon: IconDeviceGamepad2 },
-  { title: "Dashboard", url: "/club/dashboard", icon: IconLayoutDashboard },
-  { title: "Chat", url: "/club/chat", icon: IconMessageCircle },
-  { title: "Leaderboard", url: "#", icon: IconTrophy },
-  { title: "Players", url: "#", icon: IconUsers },
-  { title: "Settings", url: "#", icon: IconSettings },
+  { title: "Games Arena", url: "/club/games", icon: IconSwords },
+  { title: "Badges & Trophies", url: "/club/achievements", icon: IconAward },
+  { title: "AI Chat", url: "/club/chat", icon: IconMessageCircle },
+  { title: "Dashboard & Stats", url: "/club/dashboard", icon: IconLayoutDashboard },
+  { title: "Leaderboards", url: "/club/dashboard", icon: IconTrophy },
 ];
 
 export function DashboardNav() {
@@ -42,7 +33,7 @@ export function DashboardNav() {
     <SidebarMenu>
       {items.map((item) => (
         <SidebarMenuItem key={item.title}>
-          <SidebarMenuButton asChild isActive={pathname === item.url}>
+          <SidebarMenuButton asChild isActive={pathname === item.url || pathname.startsWith(item.url + "/")}>
             <Link href={item.url}>
               <item.icon />
               <span>{item.title}</span>
