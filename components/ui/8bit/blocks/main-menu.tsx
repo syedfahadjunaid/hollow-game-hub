@@ -1,5 +1,5 @@
+import Link from "next/link";
 import { cn } from "@/lib/utils";
-
 import { Button } from "@/components/ui/8bit/button";
 import {
   Card,
@@ -12,21 +12,16 @@ import {
 const menuItems = [
   {
     label: "START GAME",
-    action: () => console.log("Starting game..."),
+    url: "/club/games",
   },
   {
-    label: "OPTIONS",
-    action: () => console.log("Showing options..."),
+    label: "AI CHAT ASSISTANT",
+    url: "/club/chat",
   },
   {
-    label: "HIGH SCORES",
-    action: () => console.log("Showing high scores..."),
+    label: "HIGH SCORES & DASHBOARD",
+    url: "/club/dashboard",
   },
-  {
-    label: "MULTIPLAYER",
-    action: () => console.log("Multiplayer mode..."),
-  },
-  { label: "QUIT", action: () => console.log("Quitting game...") },
 ];
 
 export default function MainMenu({
@@ -42,9 +37,11 @@ export default function MainMenu({
       <CardContent>
         <div className="flex flex-col gap-4">
           {menuItems.map((item) => (
-            <Button key={item.label} className="flex items-center gap-2">
-              <span>{item.label}</span>
-            </Button>
+            <Link key={item.label} href={item.url} className="w-full">
+              <Button className="w-full flex items-center justify-center gap-2">
+                <span>{item.label}</span>
+              </Button>
+            </Link>
           ))}
         </div>
       </CardContent>
