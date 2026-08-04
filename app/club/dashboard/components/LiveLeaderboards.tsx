@@ -29,10 +29,23 @@ export function LiveLeaderboards() {
         getMyScoresAction(),
       ]);
 
-      if (gRes.success && gRes.leaderboard) setGlobalData(gRes.leaderboard);
-      if (xRes.success && xRes.leaderboard) setXpData(xRes.leaderboard);
-      if (dRes.success && dRes.leaderboard) setDailyData(dRes.leaderboard);
-      if (sRes.success && sRes.scores) setMyScores(sRes.scores);
+      if (gRes.success && gRes.leaderboard) {
+        setGlobalData(Array.isArray(gRes.leaderboard) ? gRes.leaderboard : []);
+      }
+      if (xRes.success && xRes.leaderboard) {
+        setXpData(Array.isArray(xRes.leaderboard) ? xRes.leaderboard : []);
+      }
+      if (dRes.success && dRes.leaderboard) {
+        const items = Array.isArray(dRes.leaderboard)
+          ? dRes.leaderboard
+          : Array.isArray((dRes.leaderboard as any)?.entries)
+          ? (dRes.leaderboard as any).entries
+          : [];
+        setDailyData(items);
+      }
+      if (sRes.success && sRes.scores) {
+        setMyScores(Array.isArray(sRes.scores) ? sRes.scores : []);
+      }
       setLoading(false);
     }
     loadLeaderboards();
@@ -76,21 +89,25 @@ export function LiveLeaderboards() {
               <TableBody>
                 {loading ? (
                   <TableRow><TableCell colSpan={4} className="text-center py-6">Loading global rankings...</TableCell></TableRow>
-                ) : globalData.length === 0 ? (
+                ) : !Array.isArray(globalData) || globalData.length === 0 ? (
                   <TableRow><TableCell colSpan={4} className="text-center py-6 text-muted-foreground">No scores recorded yet</TableCell></TableRow>
                 ) : (
-                  globalData.map((row, idx) => (
-                    <TableRow key={row.userId || idx}>
-                      <TableCell className="font-mono font-bold">
-                        {idx < 3 ? <span className="text-lg">{MEDALS[idx]}</span> : `#${idx + 1}`}
-                      </TableCell>
-                      <TableCell className="font-semibold">
-                        {row.username || row.email?.split("@")[0] || `Player ${idx + 1}`}
-                      </TableCell>
-                      <TableCell className="text-right font-mono text-primary font-bold">{row.totalScore}</TableCell>
-                      <TableCell className="text-right font-mono">{row.totalPlays || "-"}</TableCell>
-                    </TableRow>
-                  ))
+                  globalData.map((row: any, idx) => {
+                    const userId = row.userId || row.user?.id || row.user?._id || idx;
+                    const username = row.username || row.user?.name || row.user?.email?.split("@")[0] || row.email?.split("@")[0] || `Player ${idx + 1}`;
+                    return (
+                      <TableRow key={userId}>
+                        <TableCell className="font-mono font-bold">
+                          {idx < 3 ? <span className="text-lg">{MEDALS[idx]}</span> : `#${idx + 1}`}
+                        </TableCell>
+                        <TableCell className="font-semibold">
+                          {username}
+                        </TableCell>
+                        <TableCell className="text-right font-mono text-primary font-bold">{row.totalScore ?? row.totalBest ?? 0}</TableCell>
+                        <TableCell className="text-right font-mono">{row.totalPlays || row.plays || "-"}</TableCell>
+                      </TableRow>
+                    );
+                  })
                 )}
               </TableBody>
             </Table>
@@ -111,24 +128,28 @@ export function LiveLeaderboards() {
               <TableBody>
                 {loading ? (
                   <TableRow><TableCell colSpan={5} className="text-center py-6">Loading XP rankings...</TableCell></TableRow>
-                ) : xpData.length === 0 ? (
+                ) : !Array.isArray(xpData) || xpData.length === 0 ? (
                   <TableRow><TableCell colSpan={5} className="text-center py-6 text-muted-foreground">No progression data recorded yet</TableCell></TableRow>
                 ) : (
-                  xpData.map((row, idx) => (
-                    <TableRow key={row.userId || idx}>
-                      <TableCell className="font-mono font-bold">
-                        {idx < 3 ? <span className="text-lg">{MEDALS[idx]}</span> : `#${idx + 1}`}
-                      </TableCell>
-                      <TableCell className="font-semibold">
-                        {row.username || row.email?.split("@")[0] || `Player ${idx + 1}`}
-                      </TableCell>
-                      <TableCell className="text-center">
-                        <Badge variant="secondary" className="bg-purple-900/50 text-purple-200">LVL {row.level}</Badge>
-                      </TableCell>
-                      <TableCell className="text-right font-mono text-purple-300 font-bold">{row.xp} XP</TableCell>
-                      <TableCell className="text-right font-mono text-amber-400 font-bold">🔥 {row.streak}d</TableCell>
-                    </TableRow>
-                  ))
+                  xpData.map((row: any, idx) => {
+                    const userId = row.userId || row.user?.id || row.user?._id || idx;
+                    const username = row.username || row.user?.name || row.user?.email?.split("@")[0] || row.email?.split("@")[0] || `Player ${idx + 1}`;
+                    return (
+                      <TableRow key={userId}>
+                        <TableCell className="font-mono font-bold">
+                          {idx < 3 ? <span className="text-lg">{MEDALS[idx]}</span> : `#${idx + 1}`}
+                        </TableCell>
+                        <TableCell className="font-semibold">
+                          {username}
+                        </TableCell>
+                        <TableCell className="text-center">
+                          <Badge variant="secondary" className="bg-purple-900/50 text-purple-200">LVL {row.level}</Badge>
+                        </TableCell>
+                        <TableCell className="text-right font-mono text-purple-300 font-bold">{row.xp} XP</TableCell>
+                        <TableCell className="text-right font-mono text-amber-400 font-bold">🔥 {row.streak}d</TableCell>
+                      </TableRow>
+                    );
+                  })
                 )}
               </TableBody>
             </Table>
@@ -147,20 +168,24 @@ export function LiveLeaderboards() {
               <TableBody>
                 {loading ? (
                   <TableRow><TableCell colSpan={3} className="text-center py-6">Loading daily challenge rankings...</TableCell></TableRow>
-                ) : dailyData.length === 0 ? (
+                ) : !Array.isArray(dailyData) || dailyData.length === 0 ? (
                   <TableRow><TableCell colSpan={3} className="text-center py-6 text-muted-foreground">No daily attempts recorded today</TableCell></TableRow>
                 ) : (
-                  dailyData.map((row, idx) => (
-                    <TableRow key={row.userId || idx}>
-                      <TableCell className="font-mono font-bold">
-                        {idx < 3 ? <span className="text-lg">{MEDALS[idx]}</span> : `#${idx + 1}`}
-                      </TableCell>
-                      <TableCell className="font-semibold">
-                        {row.username || row.email?.split("@")[0] || `Player ${idx + 1}`}
-                      </TableCell>
-                      <TableCell className="text-right font-mono text-emerald-400 font-bold">{row.score}</TableCell>
-                    </TableRow>
-                  ))
+                  dailyData.map((row: any, idx) => {
+                    const userId = row.userId || row.user?.id || row.user?._id || idx;
+                    const username = row.username || row.user?.name || row.user?.email?.split("@")[0] || row.email?.split("@")[0] || `Player ${idx + 1}`;
+                    return (
+                      <TableRow key={userId}>
+                        <TableCell className="font-mono font-bold">
+                          {idx < 3 ? <span className="text-lg">{MEDALS[idx]}</span> : `#${idx + 1}`}
+                        </TableCell>
+                        <TableCell className="font-semibold">
+                          {username}
+                        </TableCell>
+                        <TableCell className="text-right font-mono text-emerald-400 font-bold">{row.score}</TableCell>
+                      </TableRow>
+                    );
+                  })
                 )}
               </TableBody>
             </Table>
@@ -180,7 +205,7 @@ export function LiveLeaderboards() {
               <TableBody>
                 {loading ? (
                   <TableRow><TableCell colSpan={4} className="text-center py-6">Loading your scores...</TableCell></TableRow>
-                ) : myScores.length === 0 ? (
+                ) : !Array.isArray(myScores) || myScores.length === 0 ? (
                   <TableRow><TableCell colSpan={4} className="text-center py-6 text-muted-foreground">You haven't played any games yet! Head to Games Arena to start.</TableCell></TableRow>
                 ) : (
                   myScores.map((score) => (

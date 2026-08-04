@@ -105,8 +105,13 @@ export async function startDailyAction(): Promise<{ success: boolean; session?: 
 export async function getDailyLeaderboardAction(date?: string, limit = 10): Promise<{ success: boolean; leaderboard?: any[]; error?: string }> {
   try {
     const query = date ? `?date=${encodeURIComponent(date)}&limit=${limit}` : `?limit=${limit}`;
-    const response = await apiRequest(`/api/games/daily/leaderboard${query}`, { method: "GET" });
-    return { success: true, leaderboard: response };
+    const response: any = await apiRequest(`/api/games/daily/leaderboard${query}`, { method: "GET" });
+    const leaderboard = Array.isArray(response)
+      ? response
+      : Array.isArray(response?.entries)
+      ? response.entries
+      : [];
+    return { success: true, leaderboard };
   } catch (error) {
     return { success: false, error: errorMessage(error) };
   }

@@ -62,10 +62,42 @@ export async function registerUserAction(userData: IUserData) {
 export async function loginUserAction(userData: IUserData) {
   // Dev-only test account — no-ops in production (see lib/auth/dev-login.ts).
   if (isDevLogin(userData.email, userData.password)) {
+    try {
+      let response: IAuthResponse;
+      try {
+        response = await apiRequest("/api/auth/login", {
+          method: "POST",
+          body: JSON.stringify({
+            email: userData.email,
+            password: userData.password,
+          }),
+        });
+      } catch {
+        response = await apiRequest("/api/auth/register", {
+          method: "POST",
+          body: JSON.stringify({
+            email: userData.email,
+            password: userData.password,
+            displayName: "Dev Tester",
+          }),
+        });
+      }
+
+      if (response?.accessToken) {
+        await setSession(response.accessToken, response.refreshToken);
+        return {
+          success: true,
+          message: "Welcome back player (dev login)",
+        };
+      }
+    } catch {
+      // Backend unavailable, fallback to offline dev session
+    }
+
     await setSession(DEV_ACCESS_TOKEN, DEV_REFRESH_TOKEN);
     return {
       success: true,
-      message: "Welcome back player (dev login)",
+      message: "Welcome back player (offline dev login)",
     };
   }
 

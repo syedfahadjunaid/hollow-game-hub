@@ -111,6 +111,7 @@ export function useChatStream({ onComplete, onError }: UseChatStreamOptions = {}
         setStatus("done");
         abortRef.current = null;
         onComplete?.(newConversationId, answer);
+        setText("");
       } catch (error: unknown) {
         abortRef.current = null;
 

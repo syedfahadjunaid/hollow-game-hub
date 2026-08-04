@@ -87,15 +87,16 @@ export function ChatThread({
         <MessageBubble key={m.id} role={m.role} content={m.content} />
       ))}
 
-      {pendingUserMessage && (
-        <MessageBubble role="user" content={pendingUserMessage} />
-      )}
+      {pendingUserMessage &&
+        messages[messages.length - 1]?.content !== pendingUserMessage && (
+          <MessageBubble role="user" content={pendingUserMessage} />
+        )}
 
-      {(streamingText || isStreaming) && (
+      {isStreaming && (
         <MessageBubble
           role="assistant"
           content={streamingText || ""}
-          streaming={isStreaming}
+          streaming={true}
         />
       )}
 
