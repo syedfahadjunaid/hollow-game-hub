@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { Button } from "@/components/ui/8bit/button";
 import { useSidebar } from "@/components/ui/sidebar";
+import { SoundToggle } from "@/components/sound-toggle";
 
 export function DashboardHeader() {
   const { toggleSidebar, open } = useSidebar();
@@ -88,6 +89,7 @@ export function DashboardHeader() {
         </Button>
 
         <div className="ml-auto flex items-center gap-2">
+          <SoundToggle />
           <Link href="https://github.com/TheOrcDev/8bitcn-ui" target="_blank">
             <Button
               className="retro flex items-center gap-2"

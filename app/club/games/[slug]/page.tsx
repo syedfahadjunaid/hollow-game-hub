@@ -19,6 +19,14 @@ import { MathSprintBoard } from "../components/MathSprintBoard";
 import { WordScrambleBoard } from "../components/WordScrambleBoard";
 import { NumberGuessBoard } from "../components/NumberGuessBoard";
 
+import {
+  playGameStartSound,
+  playWinFanfare,
+  playLevelUp,
+  playCorrectSound,
+  playWrongSound,
+} from "@/lib/sound";
+
 interface GameRunnerProps {
   params: Promise<{ slug: string }>;
 }
@@ -34,6 +42,7 @@ export default function GameRunnerPage({ params }: GameRunnerProps) {
     const res = await startGameAction(slug);
     if (res.success && res.session) {
       setSession(res.session);
+      playGameStartSound();
     } else {
       toast.error(res.error || `Failed to start game "${slug}"`);
     }
@@ -55,23 +64,35 @@ export default function GameRunnerPage({ params }: GameRunnerProps) {
       setSession(result);
 
       if (result.done) {
-        // Handle XP & Level Up notifications
-        if (result.progression) {
-          if (result.progression.levelUp) {
-            toast.success(`🎉 LEVEL UP! You reached Level ${result.progression.level}!`, { duration: 5000 });
-          } else if (result.progression.xpGained) {
-            toast.success(`+${result.progression.xpGained} XP Earned!`);
-          }
+        if (result.progression?.levelUp) {
+          playLevelUp();
+          toast.success(`🎉 LEVEL UP! You reached Level ${result.progression.level}!`, { duration: 5000 });
+        } else if ((result.score && result.score > 0) || result.view?.won || result.view?.correct) {
+          playWinFanfare();
+        } else {
+          playWrongSound();
         }
 
-        // Handle Badge Unlock notifications
+        if (result.progression?.xpGained && !result.progression.levelUp) {
+          toast.success(`+${result.progression.xpGained} XP Earned!`);
+        }
+
         if (result.newAchievements && result.newAchievements.length > 0) {
           result.newAchievements.forEach((ach) => {
             toast.success(`🏆 BADGE UNLOCKED: ${ach.title}!`, { duration: 6000 });
           });
         }
+      } else {
+        if (result.view?.lastGuessResult === "correct" || result.view?.isCorrect || result.view?.hit) {
+          playCorrectSound();
+        } else if (result.view?.lastGuessResult === "incorrect" || result.view?.isIncorrect || result.view?.miss) {
+          playWrongSound();
+        } else {
+          playCorrectSound();
+        }
       }
     } else {
+      playWrongSound();
       toast.error(res.error || "Failed to submit move");
     }
   };

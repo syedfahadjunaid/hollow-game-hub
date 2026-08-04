@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/8bit/t
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/8bit/table";
 import { Badge } from "@/components/ui/8bit/badge";
 import { IconTrophy, IconFlame, IconSparkles, IconDeviceGamepad2 } from "@tabler/icons-react";
+import { playTabSound } from "@/lib/sound";
 
 const MEDALS = ["🥇", "🥈", "🥉"];
 
@@ -69,10 +70,10 @@ export function LiveLeaderboards() {
       <CardContent>
         <Tabs defaultValue="global" className="w-full">
           <TabsList className="grid grid-cols-4 w-full mb-4">
-            <TabsTrigger value="global">Global Scores</TabsTrigger>
-            <TabsTrigger value="xp">Level & XP</TabsTrigger>
-            <TabsTrigger value="daily">Daily Ranking</TabsTrigger>
-            <TabsTrigger value="my">My Scores</TabsTrigger>
+            <TabsTrigger value="global" onClick={playTabSound}>Global Scores</TabsTrigger>
+            <TabsTrigger value="xp" onClick={playTabSound}>Level & XP</TabsTrigger>
+            <TabsTrigger value="daily" onClick={playTabSound}>Daily Ranking</TabsTrigger>
+            <TabsTrigger value="my" onClick={playTabSound}>My Scores</TabsTrigger>
           </TabsList>
 
           {/* Global Leaderboard Tab */}
