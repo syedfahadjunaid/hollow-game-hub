@@ -22,6 +22,10 @@ const menuItems = [
     label: "HIGH SCORES & DASHBOARD",
     url: "/club/dashboard",
   },
+  {
+    label: "COMMUNITY FORUM",
+    url: "/club/forum",
+  },
 ];
 
 export default function MainMenu({
