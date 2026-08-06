@@ -3,13 +3,18 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { getCategoriesAction, createThreadAction, ForumCategory } from "@/app/actions/forum-actions";
+import {
+  getCategoriesAction,
+  createThreadAction,
+  suggestTopicAction,
+  ForumCategory,
+} from "@/app/actions/forum-actions";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { IconArrowLeft, IconSend } from "@tabler/icons-react";
+import { IconArrowLeft, IconSend, IconSparkles } from "@tabler/icons-react";
 import { toast } from "react-hot-toast";
 
 export default function CreateThreadPage() {
@@ -20,16 +25,15 @@ export default function CreateThreadPage() {
   const [content, setContent] = useState("");
   const [tagsInput, setTagsInput] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [generatingAI, setGeneratingAI] = useState(false);
 
   useEffect(() => {
     async function loadCats() {
       try {
         const res = await getCategoriesAction();
-        if (res.success && res.categories) {
+        if (res.success && res.categories && res.categories.length > 0) {
           setCategories(res.categories);
-          if (res.categories.length > 0) {
-            setCategoryId(res.categories[0].id);
-          }
+          setCategoryId(res.categories[0].id || res.categories[0].slug);
         }
       } catch {
         toast.error("Failed to load categories");
@@ -37,6 +41,32 @@ export default function CreateThreadPage() {
     }
     loadCats();
   }, []);
+
+  const handleSuggestAI = async () => {
+    setGeneratingAI(true);
+    try {
+      const res = await suggestTopicAction(title || undefined);
+      if (res.success && res.suggestion) {
+        const { title: aiTitle, categorySlug, tags, content: aiContent } = res.suggestion;
+        setTitle(aiTitle);
+        setContent(aiContent);
+        if (tags) setTagsInput(tags.join(", "));
+
+        const matchedCat = categories.find((c) => c.slug === categorySlug);
+        if (matchedCat) {
+          setCategoryId(matchedCat.id || matchedCat.slug);
+        }
+
+        toast.success("AI generated thread topic & content!");
+      } else {
+        toast.error(res.error || "Failed to generate topic suggestion");
+      }
+    } catch {
+      toast.error("AI topic generator unavailable");
+    } finally {
+      setGeneratingAI(false);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -74,21 +104,36 @@ export default function CreateThreadPage() {
 
   return (
     <div className="min-h-screen w-full p-4 md:p-8 flex flex-col gap-6 max-w-3xl mx-auto">
-      <div className="flex items-center gap-3">
-        <Link href="/club/forum">
-          <Button variant="outline" size="sm" className="gap-2">
-            <IconArrowLeft className="size-4" />
-            <span>Back to Forum</span>
-          </Button>
-        </Link>
-        <h1 className="text-2xl font-extrabold tracking-tight">Create New Thread</h1>
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center gap-3">
+          <Link href="/club/forum">
+            <Button variant="outline" size="sm" className="gap-2">
+              <IconArrowLeft className="size-4" />
+              <span>Back to Forum</span>
+            </Button>
+          </Link>
+          <h1 className="text-2xl font-extrabold tracking-tight">Create New Thread</h1>
+        </div>
+
+        {/* AI Spark Topic Button */}
+        <Button
+          type="button"
+          onClick={handleSuggestAI}
+          disabled={generatingAI}
+          variant="secondary"
+          size="sm"
+          className="gap-2 border border-purple-500/30 hover:border-purple-500 text-purple-300"
+        >
+          <IconSparkles className="size-4 text-purple-400 animate-pulse" />
+          <span>{generatingAI ? "AI Generating..." : "Suggest Topic with AI"}</span>
+        </Button>
       </div>
 
       <Card className="bg-card/80 backdrop-blur-sm border-border">
         <CardHeader>
           <CardTitle>Start a Discussion</CardTitle>
           <CardDescription>
-            Share your thoughts, ask questions, or post gaming content for the community.
+            Share your thoughts, ask questions, or use AI to draft an engaging post.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -114,7 +159,7 @@ export default function CreateThreadPage() {
                 </SelectTrigger>
                 <SelectContent>
                   {categories.map((cat) => (
-                    <SelectItem key={cat.id} value={cat.id}>
+                    <SelectItem key={cat.id || cat.slug} value={cat.id || cat.slug}>
                       {cat.name}
                     </SelectItem>
                   ))}
