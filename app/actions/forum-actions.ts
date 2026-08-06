@@ -62,6 +62,13 @@ export interface GetThreadsResponse {
   };
 }
 
+export interface TopicSuggestion {
+  title: string;
+  categorySlug: string;
+  tags: string[];
+  content: string;
+}
+
 function errorMessage(error: unknown) {
   if (error instanceof ApiError) return error.message;
   if (error instanceof Error) return error.message;
@@ -167,6 +174,18 @@ export async function toggleVoteCommentAction(commentId: string): Promise<{ succ
       method: "POST",
     });
     return { success: true, upvotes: res.upvotes, hasVoted: res.hasVoted };
+  } catch (err) {
+    return { success: false, error: errorMessage(err) };
+  }
+}
+
+export async function suggestTopicAction(prompt?: string): Promise<{ success: boolean; suggestion?: TopicSuggestion; error?: string }> {
+  try {
+    const res = await apiRequest("/api/forum/suggest-topic", {
+      method: "POST",
+      body: JSON.stringify({ prompt }),
+    });
+    return { success: true, suggestion: res.suggestion };
   } catch (err) {
     return { success: false, error: errorMessage(err) };
   }
