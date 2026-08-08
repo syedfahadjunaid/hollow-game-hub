@@ -92,7 +92,7 @@ export default function HeaderProfile() {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <button className="focus:outline-none">
-            <Avatar className="size-10 shrink-0 transition-transform hover:scale-105 sm:size-12 cursor-pointer">
+            <Avatar className="size-7 shrink-0 transition-transform hover:scale-105 sm:size-8 cursor-pointer">
               <AvatarImage
                 src="https://8bitcn.com/images/pixelized-8bitcnorc.jpg"
                 alt={`@${displayName}`}
