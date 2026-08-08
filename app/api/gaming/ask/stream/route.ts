@@ -32,7 +32,7 @@ function sseError(message: string, status = 200) {
   return new Response(body, { status, headers: SSE_HEADERS });
 }
 
-function callUpstream(token: string | null, body: string) {
+function callUpstream(token: string | null, body: string, signal?: AbortSignal) {
   return fetch(`${BASE_URL}/api/gaming/ask/stream`, {
     method: "POST",
     headers: {
@@ -41,6 +41,7 @@ function callUpstream(token: string | null, body: string) {
     },
     body,
     cache: "no-store",
+    signal,
   });
 }
 
@@ -49,14 +50,17 @@ export async function POST(req: Request) {
 
   let upstream: Response;
   try {
-    upstream = await callUpstream(await getAccessToken(), body);
+    upstream = await callUpstream(await getAccessToken(), body, req.signal);
 
     // Short-lived access token (15m) — refresh once and retry.
     if (upstream.status === 401) {
       const fresh = await refreshAccessToken();
-      if (fresh) upstream = await callUpstream(fresh, body);
+      if (fresh) upstream = await callUpstream(fresh, body, req.signal);
     }
-  } catch {
+  } catch (err: unknown) {
+    if (err instanceof DOMException && err.name === "AbortError") {
+      return new Response(null, { status: 499 });
+    }
     return sseError("Could not reach the assistant service.");
   }
 
@@ -67,8 +71,15 @@ export async function POST(req: Request) {
   if (!upstream.ok || !upstream.body) {
     let message = "The assistant service returned an error.";
     try {
-      const data = await upstream.json();
-      if (data?.message) message = data.message;
+      const contentType = upstream.headers.get("content-type") || "";
+      if (contentType.includes("application/json")) {
+        const data = await upstream.json();
+        if (data?.message) message = data.message;
+        else if (data?.error) message = data.error;
+      } else {
+        const rawText = await upstream.text();
+        if (rawText && rawText.length < 200) message = rawText;
+      }
     } catch {
       // non-JSON error body — keep the default
     }
