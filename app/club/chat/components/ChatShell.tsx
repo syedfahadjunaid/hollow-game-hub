@@ -2,7 +2,7 @@
 
 import { useCallback, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { IconMessages } from "@tabler/icons-react";
+import { IconMessages, IconPlus } from "@tabler/icons-react";
 import toast from "react-hot-toast";
 
 import { Button } from "@/components/ui/8bit/button";
@@ -87,9 +87,12 @@ export function ChatShell() {
       <div className="mb-3 md:hidden">
         <Drawer open={drawerOpen} onOpenChange={setDrawerOpen}>
           <DrawerTrigger asChild>
-            <Button variant="outline" className="w-full">
-              <IconMessages className="size-4" />
-              Chats
+            <Button variant="outline" className="w-full justify-between">
+              <span className="flex items-center gap-2 truncate">
+                <IconMessages className="size-4 shrink-0" />
+                <span className="truncate">{data?.conversation?.title || "Conversations"}</span>
+              </span>
+              <span className="shrink-0 font-mono text-[10px] uppercase text-muted-foreground">Select</span>
             </Button>
           </DrawerTrigger>
           <DrawerContent className="max-h-[75vh] p-4">
@@ -103,8 +106,32 @@ export function ChatShell() {
 
       {/* Thread + composer */}
       <section className="flex min-h-0 flex-1 flex-col border-4 border-foreground bg-card dark:border-ring">
-        {/* Live region must exist before content arrives, otherwise screen
-            readers may not announce streamed answers. */}
+        {/* Retro Top Bar */}
+        <div className="flex items-center justify-between border-b-4 border-foreground bg-muted/60 px-3 py-2 dark:border-ring">
+          <div className="flex min-w-0 items-center gap-2">
+            <span className="relative flex size-2.5 shrink-0">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex size-2.5 rounded-full bg-green-500"></span>
+            </span>
+            <span className="truncate font-mono text-xs font-bold uppercase tracking-wider text-foreground">
+              {data?.conversation?.title || "GG ASSISTANT ONLINE"}
+            </span>
+          </div>
+
+          <div className="flex shrink-0 items-center gap-2">
+            <button
+              type="button"
+              onClick={() => handleSelect(null)}
+              className="flex items-center gap-1 font-mono text-[10px] uppercase text-muted-foreground transition-colors hover:text-foreground"
+              title="Start New Chat"
+            >
+              <IconPlus className="size-3.5" />
+              <span className="hidden sm:inline">New Chat</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Live region must exist before content arrives */}
         <div
           className="min-h-0 flex-1 overflow-y-auto"
           aria-live="polite"
@@ -128,8 +155,8 @@ export function ChatShell() {
         />
 
         {status === "aborted" && (
-          <p className="px-4 pb-2 text-[10px] text-muted-foreground">
-            Generation stopped.
+          <p className="px-4 pb-2 font-mono text-[10px] text-muted-foreground">
+            [SYS] Generation stopped by user.
           </p>
         )}
       </section>
