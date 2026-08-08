@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 export type StreamStatus = "idle" | "streaming" | "done" | "error" | "aborted";
 
@@ -28,6 +28,13 @@ export function useChatStream({ onComplete, onError }: UseChatStreamOptions = {}
   const [text, setText] = useState("");
   const [status, setStatus] = useState<StreamStatus>("idle");
   const abortRef = useRef<AbortController | null>(null);
+
+  // Auto-abort stream if component unmounts
+  useEffect(() => {
+    return () => {
+      abortRef.current?.abort();
+    };
+  }, []);
 
   const stop = useCallback(() => {
     abortRef.current?.abort();
@@ -67,28 +74,20 @@ export function useChatStream({ onComplete, onError }: UseChatStreamOptions = {}
         const decoder = new TextDecoder();
         let buffer = "";
 
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done) break;
+        const processFrame = (frame: string) => {
+          const lines = frame.split(/\r?\n/);
+          for (const line of lines) {
+            const trimmed = line.trim();
+            if (!trimmed.startsWith("data:")) continue;
 
-          buffer += decoder.decode(value, { stream: true });
-
-          // SSE frames are separated by a blank line.
-          const frames = buffer.split("\n\n");
-          buffer = frames.pop() ?? "";
-
-          for (const frame of frames) {
-            const line = frame.trim();
-            if (!line.startsWith("data:")) continue;
-
-            const payload = line.slice(5).trim();
+            const payload = trimmed.slice(5).trim();
             if (!payload || payload === "[DONE]") continue;
 
             let chunk: Record<string, unknown>;
             try {
               chunk = JSON.parse(payload);
             } catch {
-              continue; // ignore malformed frame rather than killing the stream
+              continue; // ignore malformed frame
             }
 
             if (typeof chunk.error === "string") {
@@ -104,6 +103,27 @@ export function useChatStream({ onComplete, onError }: UseChatStreamOptions = {}
               if (typeof chunk.conversationId === "string") {
                 newConversationId = chunk.conversationId;
               }
+            }
+          }
+        };
+
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) {
+            if (buffer.trim()) {
+              processFrame(buffer);
+            }
+            break;
+          }
+
+          buffer += decoder.decode(value, { stream: true });
+
+          const parts = buffer.split(/(?:\r?\n){2,}/);
+          buffer = parts.pop() ?? "";
+
+          for (const frame of parts) {
+            if (frame.trim()) {
+              processFrame(frame);
             }
           }
         }
