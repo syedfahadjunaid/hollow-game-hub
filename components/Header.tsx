@@ -2,12 +2,14 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { IconDeviceGamepad2 } from "@tabler/icons-react";
 import gsap from "gsap";
 
 import HeaderProfile from "./HeaderProfile";
 import { Card } from "./ui/8bit/card";
 import ThemeSelector from "./ui/8bit/theme-selector";
+import { SoundToggle } from "./sound-toggle";
 
 interface IHeaderProps {
   showProfile?: boolean;
@@ -57,7 +59,7 @@ export default function Header({ showProfile }: IHeaderProps) {
     <Card className="z-10 bg-background shadow-sm py-0">
       <div ref={headerRef} className="flex h-10 items-center justify-between gap-2 px-3 sm:px-4">
         {/* Brand: pixel gamepad mark + retro animated GIF + wordmark */}
-        <div className="flex min-w-0 items-center gap-2">
+        <Link href="/" className="flex min-w-0 items-center gap-2 group">
           <span
             ref={logoRef}
             className="flex size-7 shrink-0 items-center justify-center bg-foreground text-background transition-transform dark:bg-ring dark:text-background"
@@ -74,12 +76,13 @@ export default function Header({ showProfile }: IHeaderProps) {
               className="size-4.5 shrink-0 object-contain pixelated"
               unoptimized
             />
-            <h1 className="hidden min-w-0 truncate text-sm font-bold tracking-tight sm:block md:text-base">
+            <h1 className="hidden min-w-0 truncate text-sm font-bold tracking-tight sm:block md:text-base group-hover:text-amber-400 transition-colors">
               Hollow Game Hub
             </h1>
           </div>
-        </div>
+        </Link>
         <div className="flex shrink-0 items-center justify-center gap-2 sm:gap-3">
+          <SoundToggle />
           <ThemeSelector />
           {showProfile && <HeaderProfile />}
         </div>
