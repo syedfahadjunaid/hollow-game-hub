@@ -10,6 +10,7 @@ import HeaderProfile from "./HeaderProfile";
 import { Card } from "./ui/8bit/card";
 import ThemeSelector from "./ui/8bit/theme-selector";
 import { SoundToggle } from "./sound-toggle";
+import { NotificationBell } from "./NotificationBell";
 
 interface IHeaderProps {
   showProfile?: boolean;
@@ -82,6 +83,7 @@ export default function Header({ showProfile }: IHeaderProps) {
           </div>
         </Link>
         <div className="flex shrink-0 items-center justify-center gap-2 sm:gap-3">
+          <NotificationBell />
           <SoundToggle />
           <ThemeSelector />
           {showProfile && <HeaderProfile />}
