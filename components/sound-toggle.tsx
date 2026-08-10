@@ -1,16 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IconVolume, IconVolumeOff } from "@tabler/icons-react";
 import { Button } from "@/components/ui/8bit/button";
 import { isSoundMuted, toggleSoundMute, playClickSound } from "@/lib/sound";
 
 export function SoundToggle() {
-  const [muted, setMuted] = useState(false);
-
-  useEffect(() => {
-    setMuted(isSoundMuted());
-  }, []);
+  const [muted, setMuted] = useState(() => isSoundMuted());
 
   const handleToggle = () => {
     const next = toggleSoundMute();
