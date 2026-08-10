@@ -1,31 +1,30 @@
 "use client";
 
-import GameHero1 from "@/components/ui/8bit/blocks/game-hero1";
 import MainMenu from "@/components/ui/8bit/blocks/main-menu";
-
+import LandingPageContent from "@/components/landing/LandingPageContent";
 import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 
 const LandingPage = () => {
   const containerRef = useRef(null);
-  const leftPanel = useRef(null);
-  const rightPanel = useRef(null);
+  const menuPanel = useRef(null);
+  const contentPanel = useRef(null);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
-        defaults: { ease: "power3.out", duration: 1.2 },
+        defaults: { ease: "power3.out", duration: 1 },
       });
 
       tl.fromTo(
-        leftPanel.current,
-        { x: -100, opacity: 0 },
-        { x: 10, opacity: 1 },
+        menuPanel.current,
+        { y: -20, opacity: 0 },
+        { y: 0, opacity: 1 }
       ).fromTo(
-        rightPanel.current,
-        { x: 100, opacity: 0 },
-        { x: 0, opacity: 1 },
-        "-=0.8",
+        contentPanel.current,
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1 },
+        "-=0.6"
       );
     }, containerRef);
 
@@ -33,18 +32,19 @@ const LandingPage = () => {
   }, []);
 
   return (
-    <div
-      ref={containerRef}
-      className="w-full min-h-full flex flex-col lg:flex-row items-center justify-center gap-6 lg:gap-10 overflow-x-hidden py-4"
-    >
-      <div ref={leftPanel} className="w-full lg:w-1/2 opacity-0">
-        <MainMenu className="w-full h-full" />
+    <div ref={containerRef} className="w-full min-h-full space-y-6 py-4">
+      {/* Top Section: Quick Main Menu Navigation */}
+      <div ref={menuPanel} className="w-full max-w-2xl mx-auto opacity-0">
+        <MainMenu className="w-full shadow-lg" />
       </div>
-      <div ref={rightPanel} className="w-full lg:w-1/2 opacity-0">
-        <GameHero1 title="Welcome to AI Hollow Game Club" />
+
+      {/* Main Showcase Section */}
+      <div ref={contentPanel} className="w-full opacity-0">
+        <LandingPageContent mode="club" />
       </div>
     </div>
   );
 };
 
 export default LandingPage;
+
