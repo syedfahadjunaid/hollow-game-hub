@@ -2,7 +2,7 @@
 
 import { useCallback, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { IconMessages, IconPlus } from "@tabler/icons-react";
+import { IconMessages, IconPlus, IconRobot, IconUsers } from "@tabler/icons-react";
 import toast from "react-hot-toast";
 
 import { Button } from "@/components/ui/8bit/button";
@@ -15,12 +15,62 @@ import {
 } from "@/components/ui/8bit/drawer";
 import { gamingKeys, useConversation } from "@/lib/gaming/queries";
 import { useChatStream } from "@/hooks/useChatStream";
+import { SocketProvider, useSocket } from "@/lib/socket/SocketContext";
+import { useCommunityChat } from "@/hooks/useCommunityChat";
 
 import { ChatThread } from "./ChatThread";
 import { Composer } from "./Composer";
 import { ConversationList } from "./ConversationList";
+import { RoomList } from "./RoomList";
+import { CommunityChatThread } from "./CommunityChatThread";
+
+type ChatMode = "ai" | "community";
 
 export function ChatShell() {
+  const [mode, setMode] = useState<ChatMode>("ai");
+
+  return (
+    <SocketProvider>
+      <div className="flex flex-col h-full min-h-0 w-full gap-3">
+        {/* Mode Selector Tabs */}
+        <div className="flex shrink-0 gap-2 border-b-2 border-muted pb-2 font-mono text-xs">
+          <button
+            type="button"
+            onClick={() => setMode("ai")}
+            className={`flex items-center gap-1.5 px-3 py-1.5 border-2 transition-all ${
+              mode === "ai"
+                ? "border-foreground bg-primary text-primary-foreground font-bold shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+                : "border-transparent bg-muted/50 hover:bg-muted text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            <IconRobot className="size-4" />
+            <span>GG AI ASSISTANT</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setMode("community")}
+            className={`flex items-center gap-1.5 px-3 py-1.5 border-2 transition-all ${
+              mode === "community"
+                ? "border-foreground bg-primary text-primary-foreground font-bold shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+                : "border-transparent bg-muted/50 hover:bg-muted text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            <IconUsers className="size-4" />
+            <span>COMMUNITY CHANNELS</span>
+          </button>
+        </div>
+
+        {/* Tab Content */}
+        <div className="min-h-0 flex-1">
+          {mode === "ai" ? <AiAssistantShell /> : <CommunityChatShell />}
+        </div>
+      </div>
+    </SocketProvider>
+  );
+}
+
+function AiAssistantShell() {
   const queryClient = useQueryClient();
 
   const [activeId, setActiveId] = useState<string | null>(null);
@@ -34,12 +84,10 @@ export function ChatShell() {
     (conversationId: string | undefined) => {
       setPendingUser(null);
 
-      // A brand-new thread: adopt the id the backend just created.
       if (conversationId && conversationId !== activeId) {
         setActiveId(conversationId);
       }
 
-      // Pull the authoritative messages (and any auto-generated title).
       if (conversationId) {
         queryClient.invalidateQueries({
           queryKey: gamingKeys.conversation(conversationId),
@@ -80,10 +128,8 @@ export function ChatShell() {
 
   return (
     <div className="flex h-full min-h-0 w-full flex-col md:flex-row md:gap-4">
-      {/* Desktop sidebar */}
       <aside className="hidden shrink-0 md:block md:w-64 lg:w-72">{sidebar}</aside>
 
-      {/* Mobile: conversation list lives in a drawer */}
       <div className="mb-3 md:hidden">
         <Drawer open={drawerOpen} onOpenChange={setDrawerOpen}>
           <DrawerTrigger asChild>
@@ -104,9 +150,7 @@ export function ChatShell() {
         </Drawer>
       </div>
 
-      {/* Thread + composer */}
       <section className="flex min-h-0 flex-1 flex-col border-4 border-foreground bg-card dark:border-ring">
-        {/* Retro Top Bar */}
         <div className="flex items-center justify-between border-b-4 border-foreground bg-muted/60 px-3 py-2 dark:border-ring">
           <div className="flex min-w-0 items-center gap-2">
             <span className="relative flex size-2.5 shrink-0">
@@ -131,7 +175,6 @@ export function ChatShell() {
           </div>
         </div>
 
-        {/* Live region must exist before content arrives */}
         <div
           className="min-h-0 flex-1 overflow-y-auto"
           aria-live="polite"
@@ -159,6 +202,59 @@ export function ChatShell() {
             [SYS] Generation stopped by user.
           </p>
         )}
+      </section>
+    </div>
+  );
+}
+
+function CommunityChatShell() {
+  const { onlineCount } = useSocket();
+  const [selectedRoomId, setSelectedRoomId] = useState<string | null>(null);
+
+  const {
+    rooms,
+    messages,
+    typingUsers,
+    isLoadingMessages,
+    sendMessage,
+    startTyping,
+    stopTyping,
+    toggleReaction,
+  } = useCommunityChat(selectedRoomId);
+
+  // Auto-select first channel if none selected
+  if (!selectedRoomId && rooms.length > 0) {
+    const firstRoom = rooms[0];
+    const firstId = firstRoom._id || firstRoom.id || firstRoom.slug;
+    setSelectedRoomId(firstId);
+  }
+
+  const currentRoom = rooms.find(
+    (r) => (r._id || r.id || r.slug) === selectedRoomId
+  );
+
+  return (
+    <div className="flex h-full min-h-0 w-full flex-col md:flex-row md:gap-4">
+      <aside className="hidden shrink-0 md:block md:w-64 lg:w-72">
+        <RoomList
+          rooms={rooms}
+          selectedRoomId={selectedRoomId}
+          onSelectRoom={(id) => setSelectedRoomId(id)}
+          onlineCount={onlineCount}
+        />
+      </aside>
+
+      <section className="flex min-h-0 flex-1 flex-col">
+        <CommunityChatThread
+          roomName={currentRoom?.name || "general"}
+          messages={messages}
+          typingUsers={typingUsers}
+          isLoading={isLoadingMessages}
+          onSendMessage={sendMessage}
+          onStartTyping={startTyping}
+          onStopTyping={stopTyping}
+          onToggleReaction={toggleReaction}
+        />
       </section>
     </div>
   );
