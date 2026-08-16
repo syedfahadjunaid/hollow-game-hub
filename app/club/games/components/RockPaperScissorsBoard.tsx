@@ -69,16 +69,16 @@ export function RockPaperScissorsBoard({ view, onMove, isSubmitting, done }: Roc
 
         {/* Action Choice Buttons */}
         {!done && (
-          <div className="grid grid-cols-3 gap-3 w-full max-w-xs">
+          <div className="grid grid-cols-3 gap-2 sm:gap-3 w-full max-w-xs">
             {(["rock", "paper", "scissors"] as const).map((m) => (
               <Button
                 key={m}
                 variant="outline"
                 disabled={isSubmitting}
                 onClick={() => onMove({ move: m })}
-                className="h-16 flex flex-col items-center justify-center gap-1 hover:border-primary"
+                className="h-14 sm:h-16 flex flex-col items-center justify-center gap-1 hover:border-primary px-1 text-center"
               >
-                <span className="text-sm font-bold">{MOVE_ICONS[m]}</span>
+                <span className="text-xs sm:text-sm font-bold">{MOVE_ICONS[m]}</span>
               </Button>
             ))}
           </div>
