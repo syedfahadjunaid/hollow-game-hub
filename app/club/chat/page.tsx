@@ -6,7 +6,7 @@ export const metadata = {
 
 export default function ChatPage() {
   return (
-    <div className="flex h-[calc(100vh-10rem)] w-full flex-col">
+    <div className="flex h-[calc(100dvh-7.5rem)] sm:h-[calc(100dvh-8.5rem)] min-h-[480px] w-full flex-col">
       <div className="mb-3 shrink-0">
         <h1 className="text-lg font-semibold tracking-tight md:text-xl">
           Gaming Assistant
