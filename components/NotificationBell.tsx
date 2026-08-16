@@ -145,7 +145,7 @@ export function NotificationBell() {
 
       <DropdownMenuContent
         align="end"
-        className="w-80 sm:w-96 p-0 border-2 border-foreground bg-popover shadow-xl rounded-lg font-mono text-xs z-50 overflow-hidden"
+        className="w-[calc(100vw-1.5rem)] max-w-sm sm:w-96 p-0 border-2 border-foreground bg-popover shadow-xl rounded-lg font-mono text-xs z-50 overflow-hidden"
       >
         {/* Header Bar */}
         <div className="p-3 border-b border-border bg-muted/40 flex items-center justify-between">
