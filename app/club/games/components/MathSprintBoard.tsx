@@ -46,8 +46,8 @@ export function MathSprintBoard({ view, onMove, isSubmitting, done }: MathSprint
       </CardHeader>
       <CardContent className="flex flex-col items-center gap-6">
         {/* Math Expression Display */}
-        <div className="p-6 bg-muted/60 border-2 border-primary/30 w-full text-center rounded">
-          <span className="text-4xl font-mono font-extrabold tracking-wider">
+        <div className="p-4 sm:p-6 bg-muted/60 border-2 border-primary/30 w-full text-center rounded">
+          <span className="text-2xl sm:text-4xl font-mono font-extrabold tracking-wider break-all">
             {view.question || "..."}
           </span>
         </div>
