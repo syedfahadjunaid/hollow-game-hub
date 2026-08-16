@@ -181,23 +181,23 @@ export default function LandingPageContent({ mode = "public", className }: Landi
         </p>
 
         {/* CTAs */}
-        <div className="relative z-10 flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-6">
+        <div className="relative z-10 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center justify-center gap-3 sm:gap-4 mb-6 w-full max-w-md sm:max-w-none">
           {mode === "public" ? (
             <>
-              <Button asChild size="lg" className="retro bg-amber-500 text-black hover:bg-amber-400 font-bold px-6">
-                <Link href="/auth/login" className="flex items-center gap-2">
+              <Button asChild size="lg" className="retro bg-amber-500 text-black hover:bg-amber-400 font-bold px-4 sm:px-6 w-full sm:w-auto">
+                <Link href="/auth/login" className="flex items-center justify-center gap-2">
                   <IconLogin className="size-5" />
                   <span>ENTER PORTAL (LOGIN)</span>
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="retro font-bold px-6">
-                <Link href="/auth/sign-up" className="flex items-center gap-2">
+              <Button asChild variant="outline" size="lg" className="retro font-bold px-4 sm:px-6 w-full sm:w-auto">
+                <Link href="/auth/sign-up" className="flex items-center justify-center gap-2">
                   <IconUserPlus className="size-5" />
                   <span>CREATE ACCOUNT</span>
                 </Link>
               </Button>
-              <Button asChild variant="secondary" size="lg" className="retro font-bold px-6">
-                <Link href="/club/games" className="flex items-center gap-2">
+              <Button asChild variant="secondary" size="lg" className="retro font-bold px-4 sm:px-6 w-full sm:w-auto">
+                <Link href="/club/games" className="flex items-center justify-center gap-2">
                   <IconDeviceGamepad2 className="size-5" />
                   <span>EXPLORE GAMES</span>
                 </Link>
@@ -205,20 +205,20 @@ export default function LandingPageContent({ mode = "public", className }: Landi
             </>
           ) : (
             <>
-              <Button asChild size="lg" className="retro bg-amber-500 text-black hover:bg-amber-400 font-bold px-6">
-                <Link href="/club/games" className="flex items-center gap-2">
+              <Button asChild size="lg" className="retro bg-amber-500 text-black hover:bg-amber-400 font-bold px-4 sm:px-6 w-full sm:w-auto">
+                <Link href="/club/games" className="flex items-center justify-center gap-2">
                   <IconDeviceGamepad2 className="size-5 text-black" />
                   <span>START PLAYING GAMES</span>
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="retro font-bold px-6">
-                <Link href="/club/chat" className="flex items-center gap-2">
+              <Button asChild variant="outline" size="lg" className="retro font-bold px-4 sm:px-6 w-full sm:w-auto">
+                <Link href="/club/chat" className="flex items-center justify-center gap-2">
                   <IconBrain className="size-5 text-amber-500" />
                   <span>ASK AI ASSISTANT</span>
                 </Link>
               </Button>
-              <Button asChild variant="secondary" size="lg" className="retro font-bold px-6">
-                <Link href="/club/dashboard" className="flex items-center gap-2">
+              <Button asChild variant="secondary" size="lg" className="retro font-bold px-4 sm:px-6 w-full sm:w-auto">
+                <Link href="/club/dashboard" className="flex items-center justify-center gap-2">
                   <IconTrophy className="size-5 text-emerald-500" />
                   <span>VIEW PLAYER STATS</span>
                 </Link>
