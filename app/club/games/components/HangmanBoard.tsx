@@ -51,17 +51,17 @@ export function HangmanBoard({ view, onMove, isSubmitting, done }: HangmanBoardP
         <CardTitle className="text-xl">Guess the Gaming Term</CardTitle>
         <CardDescription>{view.message || "Pick letters or guess the full word"}</CardDescription>
       </CardHeader>
-      <CardContent className="flex flex-col items-center gap-6">
+      <CardContent className="flex flex-col items-center gap-4 sm:gap-6 p-4 sm:p-6">
         {/* Masked Word Display */}
-        <div className="p-4 bg-muted/50 border-2 border-primary/20 w-full text-center rounded">
-          <span className="text-3xl font-mono tracking-widest font-bold">
+        <div className="p-3 sm:p-4 bg-muted/50 border-2 border-primary/20 w-full text-center rounded">
+          <span className="text-xl sm:text-3xl font-mono tracking-widest font-bold break-all">
             {view.masked || "_ _ _ _ _"}
           </span>
         </div>
 
         {/* Keyboard letter buttons */}
         {!done && (
-          <div className="flex flex-wrap justify-center gap-1.5 max-w-md">
+          <div className="flex flex-wrap justify-center gap-1 sm:gap-1.5 max-w-md w-full">
             {ALPHABET.map((char) => {
               const isUsed = guessedLetters.includes(char);
               return (
@@ -71,7 +71,7 @@ export function HangmanBoard({ view, onMove, isSubmitting, done }: HangmanBoardP
                   variant={isUsed ? "ghost" : "outline"}
                   disabled={isUsed || isSubmitting}
                   onClick={() => handleLetterClick(char)}
-                  className="w-8 h-9 text-xs font-mono uppercase"
+                  className="w-7 h-8 sm:w-8 sm:h-9 text-[11px] sm:text-xs font-mono uppercase p-0"
                 >
                   {char}
                 </Button>
@@ -88,9 +88,9 @@ export function HangmanBoard({ view, onMove, isSubmitting, done }: HangmanBoardP
               onChange={(e) => setWordGuess(e.target.value)}
               placeholder="Full word guess..."
               disabled={isSubmitting}
-              className="text-sm font-mono"
+              className="text-xs sm:text-sm font-mono"
             />
-            <Button type="submit" size="sm" disabled={!wordGuess.trim() || isSubmitting}>
+            <Button type="submit" size="sm" disabled={!wordGuess.trim() || isSubmitting} className="shrink-0">
               SOLVE
             </Button>
           </form>
