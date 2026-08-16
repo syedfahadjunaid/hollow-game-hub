@@ -36,7 +36,7 @@ export function useCommunityChat(selectedRoomId: string | null) {
   // Fetch rooms list
   const fetchRooms = useCallback(async () => {
     try {
-      const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+      const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8001";
       const res = await fetch(`${baseUrl}/api/community-chat/rooms`);
       if (!res.ok) return;
       const data = await res.json();
@@ -62,7 +62,7 @@ export function useCommunityChat(selectedRoomId: string | null) {
 
     const loadHistory = async () => {
       try {
-        const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+        const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8001";
         const res = await fetch(
           `${baseUrl}/api/community-chat/rooms/${selectedRoomId}/messages`
         );
