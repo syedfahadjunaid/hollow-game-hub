@@ -33,31 +33,31 @@ export function ChatShell() {
     <SocketProvider>
       <div className="flex flex-col h-full min-h-0 w-full gap-3">
         {/* Mode Selector Tabs */}
-        <div className="flex shrink-0 gap-2 border-b-2 border-muted pb-2 font-mono text-xs">
+        <div className="flex shrink-0 gap-2 border-b-2 border-muted pb-2 font-mono text-xs overflow-x-auto scrollbar-none">
           <button
             type="button"
             onClick={() => setMode("ai")}
-            className={`flex items-center gap-1.5 px-3 py-1.5 border-2 transition-all ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 border-2 transition-all whitespace-nowrap ${
               mode === "ai"
                 ? "border-foreground bg-primary text-primary-foreground font-bold shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
                 : "border-transparent bg-muted/50 hover:bg-muted text-muted-foreground hover:text-foreground"
             }`}
           >
-            <IconRobot className="size-4" />
-            <span>GG AI ASSISTANT</span>
+            <IconRobot className="size-4 shrink-0" />
+            <span className="text-[11px] sm:text-xs">GG AI ASSISTANT</span>
           </button>
 
           <button
             type="button"
             onClick={() => setMode("community")}
-            className={`flex items-center gap-1.5 px-3 py-1.5 border-2 transition-all ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 border-2 transition-all whitespace-nowrap ${
               mode === "community"
                 ? "border-foreground bg-primary text-primary-foreground font-bold shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
                 : "border-transparent bg-muted/50 hover:bg-muted text-muted-foreground hover:text-foreground"
             }`}
           >
-            <IconUsers className="size-4" />
-            <span>COMMUNITY CHANNELS</span>
+            <IconUsers className="size-4 shrink-0" />
+            <span className="text-[11px] sm:text-xs">COMMUNITY CHANNELS</span>
           </button>
         </div>
 
@@ -210,6 +210,7 @@ function AiAssistantShell() {
 function CommunityChatShell() {
   const { onlineCount } = useSocket();
   const [selectedRoomId, setSelectedRoomId] = useState<string | null>(null);
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   const {
     rooms,
@@ -233,16 +234,46 @@ function CommunityChatShell() {
     (r) => (r._id || r.id || r.slug) === selectedRoomId
   );
 
+  const handleSelectRoom = (id: string) => {
+    setSelectedRoomId(id);
+    setDrawerOpen(false);
+  };
+
+  const roomList = (
+    <RoomList
+      rooms={rooms}
+      selectedRoomId={selectedRoomId}
+      onSelectRoom={handleSelectRoom}
+      onlineCount={onlineCount}
+    />
+  );
+
   return (
     <div className="flex h-full min-h-0 w-full flex-col md:flex-row md:gap-4">
       <aside className="hidden shrink-0 md:block md:w-64 lg:w-72">
-        <RoomList
-          rooms={rooms}
-          selectedRoomId={selectedRoomId}
-          onSelectRoom={(id) => setSelectedRoomId(id)}
-          onlineCount={onlineCount}
-        />
+        {roomList}
       </aside>
+
+      {/* Mobile Channel Selector Drawer */}
+      <div className="mb-3 md:hidden">
+        <Drawer open={drawerOpen} onOpenChange={setDrawerOpen}>
+          <DrawerTrigger asChild>
+            <Button variant="outline" className="w-full justify-between">
+              <span className="flex items-center gap-2 truncate">
+                <IconUsers className="size-4 shrink-0" />
+                <span className="truncate">#{currentRoom?.name || "Channels"}</span>
+              </span>
+              <span className="shrink-0 font-mono text-[10px] uppercase text-muted-foreground">Switch Room</span>
+            </Button>
+          </DrawerTrigger>
+          <DrawerContent className="max-h-[75vh] p-4">
+            <DrawerHeader className="px-0">
+              <DrawerTitle className="text-sm">Community Channels</DrawerTitle>
+            </DrawerHeader>
+            <div className="min-h-0 flex-1 overflow-y-auto">{roomList}</div>
+          </DrawerContent>
+        </Drawer>
+      </div>
 
       <section className="flex min-h-0 flex-1 flex-col">
         <CommunityChatThread
