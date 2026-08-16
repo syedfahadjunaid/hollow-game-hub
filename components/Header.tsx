@@ -77,12 +77,15 @@ export default function Header({ showProfile }: IHeaderProps) {
               className="size-4.5 shrink-0 object-contain pixelated"
               unoptimized
             />
+            <span className="block sm:hidden text-xs font-black font-mono tracking-wider text-amber-400">
+              HGH
+            </span>
             <h1 className="hidden min-w-0 truncate text-sm font-bold tracking-tight sm:block md:text-base group-hover:text-amber-400 transition-colors">
               Hollow Game Hub
             </h1>
           </div>
         </Link>
-        <div className="flex shrink-0 items-center justify-center gap-2 sm:gap-3">
+        <div className="flex shrink-0 items-center justify-center gap-1.5 sm:gap-3">
           <NotificationBell />
           <SoundToggle />
           <ThemeSelector />
