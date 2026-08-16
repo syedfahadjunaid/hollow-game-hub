@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { IconSend, IconLoader2, IconSmile } from "@tabler/icons-react";
+import { IconSend, IconLoader2, IconMoodSmile } from "@tabler/icons-react";
 import { UserChatMessage } from "@/hooks/useCommunityChat";
 import { Button } from "@/components/ui/8bit/button";
 
