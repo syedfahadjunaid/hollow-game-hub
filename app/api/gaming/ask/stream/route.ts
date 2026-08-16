@@ -15,7 +15,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const BASE_URL =
-  process.env.API_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+  process.env.API_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:8001";
 
 const SSE_HEADERS = {
   "Content-Type": "text/event-stream",
