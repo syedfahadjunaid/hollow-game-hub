@@ -47,7 +47,7 @@ export function NumberGuessBoard({ view, onMove, isSubmitting, done }: NumberGue
         {/* Status / Hint Display */}
         {view.result && (
           <div
-            className={`p-4 border-2 w-full text-center rounded text-lg font-bold font-mono ${
+            className={`p-3 sm:p-4 border-2 w-full text-center rounded text-base sm:text-lg font-bold font-mono ${
               view.result === "higher"
                 ? "bg-sky-500/20 border-sky-500 text-sky-300"
                 : view.result === "lower"
