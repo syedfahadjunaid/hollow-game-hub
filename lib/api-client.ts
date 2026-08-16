@@ -1,7 +1,7 @@
 import { getAccessToken, getRefreshToken, setSession } from "@/lib/auth/session";
 
 const BASE_URL =
-  process.env.API_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+  process.env.API_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:8001";
 
 export class ApiError extends Error {
   status: number;
