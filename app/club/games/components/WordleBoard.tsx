@@ -49,11 +49,11 @@ export function WordleBoard({ view, onMove, isSubmitting, done }: WordleBoardPro
       </CardHeader>
       <CardContent className="flex flex-col items-center gap-6">
         {/* Grid of 6 rows x 5 columns */}
-        <div className="grid grid-rows-6 gap-2 w-full max-w-xs">
+        <div className="grid grid-rows-6 gap-1.5 sm:gap-2 w-full max-w-[280px] sm:max-w-xs">
           {Array.from({ length: maxAttempts }).map((_, rowIndex) => {
             const rowGuess = guesses[rowIndex];
             return (
-              <div key={rowIndex} className="grid grid-cols-5 gap-2">
+              <div key={rowIndex} className="grid grid-cols-5 gap-1.5 sm:gap-2">
                 {Array.from({ length: 5 }).map((_, colIndex) => {
                   let letter = "";
                   let statusStyle = "border-2 border-primary/30 bg-background text-foreground";
@@ -73,7 +73,7 @@ export function WordleBoard({ view, onMove, isSubmitting, done }: WordleBoardPro
                   return (
                     <div
                       key={colIndex}
-                      className={`h-12 w-full flex items-center justify-center text-lg uppercase font-mono transition-all ${statusStyle}`}
+                      className={`h-11 sm:h-12 w-full flex items-center justify-center text-base sm:text-lg uppercase font-mono transition-all ${statusStyle}`}
                     >
                       {letter}
                     </div>
