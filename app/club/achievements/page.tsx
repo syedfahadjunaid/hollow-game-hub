@@ -78,13 +78,13 @@ export default function AchievementsPage() {
       {/* Overview Card */}
       {data && (
         <Card className="w-full border-2 border-primary/30 bg-card">
-          <CardContent className="p-6 flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex items-center gap-4">
-              <div className="size-16 rounded flex items-center justify-center bg-amber-500/20 border-2 border-amber-500 text-amber-300">
-                <IconAward className="size-10" />
+          <CardContent className="p-4 sm:p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 sm:gap-6">
+            <div className="flex items-center gap-3 sm:gap-4">
+              <div className="size-12 sm:size-16 rounded flex items-center justify-center bg-amber-500/20 border-2 border-amber-500 text-amber-300 shrink-0">
+                <IconAward className="size-8 sm:size-10" />
               </div>
               <div>
-                <h2 className="text-xl font-bold">Collector Progress</h2>
+                <h2 className="text-lg sm:text-xl font-bold">Collector Progress</h2>
                 <p className="text-xs text-muted-foreground">
                   You have unlocked <strong className="text-foreground">{earnedCount}</strong> of <strong className="text-foreground">{total}</strong> achievements.
                 </p>
@@ -96,18 +96,19 @@ export default function AchievementsPage() {
                 <span>Completion Rate</span>
                 <span>{pct}%</span>
               </div>
-              <Progress value={pct} className="h-4" />
+              <Progress value={pct} className="h-3 sm:h-4" />
             </div>
           </CardContent>
         </Card>
       )}
 
       {/* Filter Tabs */}
-      <div className="flex gap-2">
+      <div className="flex flex-wrap gap-2">
         <Button
           variant={filter === "all" ? "default" : "outline"}
           size="sm"
           onClick={() => setFilter("all")}
+          className="text-xs"
         >
           All ({total})
         </Button>
@@ -115,31 +116,31 @@ export default function AchievementsPage() {
           variant={filter === "earned" ? "default" : "outline"}
           size="sm"
           onClick={() => setFilter("earned")}
-          className="gap-1"
+          className="gap-1 text-xs"
         >
-          <IconCheck className="size-4 text-emerald-400" />
+          <IconCheck className="size-3.5 text-emerald-400" />
           <span>Unlocked ({earnedCount})</span>
         </Button>
         <Button
           variant={filter === "locked" ? "default" : "outline"}
           size="sm"
           onClick={() => setFilter("locked")}
-          className="gap-1"
+          className="gap-1 text-xs"
         >
-          <IconLock className="size-4 text-muted-foreground" />
+          <IconLock className="size-3.5 text-muted-foreground" />
           <span>Locked ({total - earnedCount})</span>
         </Button>
       </div>
 
       {/* Badges Grid */}
       {loading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 py-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 py-6">
           {Array.from({ length: 6 }).map((_, idx) => (
             <Card key={idx} className="animate-pulse h-36" />
           ))}
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 py-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 py-2">
           {displayList.map((badge) => (
             <Card
               key={badge.id}
