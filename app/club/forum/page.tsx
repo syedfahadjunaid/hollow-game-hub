@@ -85,23 +85,23 @@ export default function ForumPage() {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-border pb-4">
         <div className="flex items-center gap-3">
           <Link href="/club/main-menu">
-            <Button variant="outline" size="sm" className="gap-2">
+            <Button variant="outline" size="sm" className="gap-2 shrink-0">
               <IconArrowLeft className="size-4" />
               <span>Menu</span>
             </Button>
           </Link>
           <div>
-            <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight flex items-center gap-2">
-              <IconMessage className="size-7 text-indigo-500" />
-              Community Forum
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight flex items-center gap-2">
+              <IconMessage className="size-6 sm:size-7 text-indigo-500 shrink-0" />
+              <span>Community Forum</span>
             </h1>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-xs sm:text-sm text-muted-foreground">
               Discuss games, strategies, tech setups, and platform updates.
             </p>
           </div>
         </div>
-        <Link href="/club/forum/new">
-          <Button className="gap-2 bg-indigo-600 hover:bg-indigo-700 text-white">
+        <Link href="/club/forum/new" className="w-full sm:w-auto">
+          <Button className="w-full sm:w-auto gap-2 bg-indigo-600 hover:bg-indigo-700 text-white">
             <IconPlus className="size-4" />
             <span>New Thread</span>
           </Button>
@@ -109,12 +109,12 @@ export default function ForumPage() {
       </div>
 
       {/* Categories Bar */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+      <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none -mx-1 px-1">
         <Button
           variant={selectedCategory === "" ? "default" : "outline"}
           size="sm"
           onClick={() => setSelectedCategory("")}
-          className="rounded-full"
+          className="rounded-full shrink-0 text-xs"
         >
           All Topics
         </Button>
@@ -124,7 +124,7 @@ export default function ForumPage() {
             variant={selectedCategory === cat.slug ? "default" : "outline"}
             size="sm"
             onClick={() => setSelectedCategory(cat.slug)}
-            className="rounded-full gap-1.5"
+            className="rounded-full gap-1.5 shrink-0 text-xs"
             style={
               selectedCategory === cat.slug
                 ? { backgroundColor: cat.color, color: "#fff" }
@@ -140,43 +140,43 @@ export default function ForumPage() {
       </div>
 
       {/* Controls Bar: Search & Sort */}
-      <div className="flex flex-col sm:flex-row gap-3 items-center justify-between">
+      <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
         <div className="relative w-full sm:w-80">
           <IconSearch className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
           <Input
             placeholder="Search discussions..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-9"
+            className="pl-9 text-sm"
           />
         </div>
 
-        <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
+        <div className="flex items-center gap-1.5 w-full sm:w-auto justify-between sm:justify-end overflow-x-auto pb-1">
           <Button
             variant={sort === "latest" ? "secondary" : "ghost"}
             size="sm"
             onClick={() => setSort("latest")}
-            className="gap-1"
+            className="gap-1 text-xs px-2.5"
           >
-            <IconClock className="size-4" />
+            <IconClock className="size-3.5" />
             Latest
           </Button>
           <Button
             variant={sort === "popular" ? "secondary" : "ghost"}
             size="sm"
             onClick={() => setSort("popular")}
-            className="gap-1"
+            className="gap-1 text-xs px-2.5"
           >
-            <IconFlame className="size-4" />
+            <IconFlame className="size-3.5" />
             Popular
           </Button>
           <Button
             variant={sort === "views" ? "secondary" : "ghost"}
             size="sm"
             onClick={() => setSort("views")}
-            className="gap-1"
+            className="gap-1 text-xs px-2.5"
           >
-            <IconEye className="size-4" />
+            <IconEye className="size-3.5" />
             Most Viewed
           </Button>
         </div>
@@ -209,21 +209,21 @@ export default function ForumPage() {
           {threads.map((thread) => (
             <Link key={thread.id} href={`/club/forum/thread/${thread.id}`}>
               <Card className="hover:border-indigo-500/50 transition-all duration-200 cursor-pointer group bg-card/60 backdrop-blur-sm">
-                <CardContent className="p-5 flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
+                <CardContent className="p-4 sm:p-5 flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
                   {/* Upvote & Thread Info */}
-                  <div className="flex items-start gap-4 flex-1">
+                  <div className="flex items-start gap-3 sm:gap-4 flex-1 min-w-0 w-full">
                     <Button
                       variant="outline"
                       size="sm"
                       onClick={(e) => handleVote(thread.id, e)}
-                      className="flex flex-col items-center justify-center h-14 w-12 p-0 border-indigo-500/20 hover:border-indigo-500 group-hover:bg-indigo-500/10"
+                      className="flex flex-col items-center justify-center h-12 w-10 sm:h-14 sm:w-12 p-0 shrink-0 border-indigo-500/20 hover:border-indigo-500 group-hover:bg-indigo-500/10"
                     >
-                      <IconArrowUp className="size-4 text-indigo-400" />
-                      <span className="text-xs font-bold">{thread.upvoteCount}</span>
+                      <IconArrowUp className="size-3.5 sm:size-4 text-indigo-400" />
+                      <span className="text-[11px] sm:text-xs font-bold">{thread.upvoteCount}</span>
                     </Button>
 
-                    <div className="flex flex-col gap-1.5">
-                      <div className="flex items-center gap-2 flex-wrap">
+                    <div className="flex flex-col gap-1.5 min-w-0 flex-1">
+                      <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
                         {thread.isPinned && (
                           <Badge variant="default" className="bg-amber-500 text-black gap-1 text-[10px]">
                             <IconPin className="size-3" /> Pinned
@@ -237,26 +237,26 @@ export default function ForumPage() {
                         {thread.category && (
                           <Badge
                             variant="outline"
-                            className="text-xs font-semibold"
+                            className="text-[10px] sm:text-xs font-semibold"
                             style={{ borderColor: thread.category.color, color: thread.category.color }}
                           >
                             {thread.category.name}
                           </Badge>
                         )}
                         {thread.tags?.map((tag) => (
-                          <span key={tag} className="text-xs text-muted-foreground bg-secondary px-2 py-0.5 rounded">
+                          <span key={tag} className="text-[10px] sm:text-xs text-muted-foreground bg-secondary px-1.5 py-0.5 rounded">
                             #{tag}
                           </span>
                         ))}
                       </div>
 
-                      <h2 className="text-lg font-bold text-foreground group-hover:text-indigo-400 transition-colors">
+                      <h2 className="text-base sm:text-lg font-bold text-foreground group-hover:text-indigo-400 transition-colors break-words">
                         {thread.title}
                       </h2>
 
-                      <div className="flex items-center gap-4 text-xs text-muted-foreground mt-1">
+                      <div className="flex items-center gap-2 sm:gap-4 text-[11px] sm:text-xs text-muted-foreground flex-wrap">
                         <span>
-                          Posted by <strong className="text-foreground">{thread.author?.displayName || thread.author?.name || "Anonymous"}</strong>
+                          By <strong className="text-foreground">{thread.author?.displayName || thread.author?.name || "Anonymous"}</strong>
                         </span>
                         <span>•</span>
                         <span>{new Date(thread.createdAt).toLocaleDateString()}</span>
@@ -265,14 +265,14 @@ export default function ForumPage() {
                   </div>
 
                   {/* Counters */}
-                  <div className="flex items-center gap-4 text-xs text-muted-foreground self-end md:self-center">
-                    <div className="flex items-center gap-1.5 bg-secondary/50 px-3 py-1.5 rounded-full">
-                      <IconMessage className="size-4 text-indigo-400" />
+                  <div className="flex items-center gap-2 sm:gap-4 text-[11px] sm:text-xs text-muted-foreground self-start sm:self-end md:self-center pl-13 sm:pl-0">
+                    <div className="flex items-center gap-1 bg-secondary/50 px-2.5 py-1 rounded-full">
+                      <IconMessage className="size-3.5 text-indigo-400" />
                       <span className="font-semibold text-foreground">{thread.commentCount}</span>
                       <span>replies</span>
                     </div>
-                    <div className="flex items-center gap-1.5 bg-secondary/50 px-3 py-1.5 rounded-full">
-                      <IconEye className="size-4 text-muted-foreground" />
+                    <div className="flex items-center gap-1 bg-secondary/50 px-2.5 py-1 rounded-full">
+                      <IconEye className="size-3.5 text-muted-foreground" />
                       <span className="font-semibold text-foreground">{thread.views}</span>
                       <span>views</span>
                     </div>
