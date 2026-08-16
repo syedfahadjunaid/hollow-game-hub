@@ -43,8 +43,8 @@ export function WordScrambleBoard({ view, onMove, isSubmitting, done }: WordScra
       </CardHeader>
       <CardContent className="flex flex-col items-center gap-6">
         {/* Scrambled Word Display */}
-        <div className="p-6 bg-muted/60 border-2 border-primary/30 w-full text-center rounded">
-          <span className="text-3xl font-mono font-extrabold tracking-widest uppercase">
+        <div className="p-4 sm:p-6 bg-muted/60 border-2 border-primary/30 w-full text-center rounded">
+          <span className="text-2xl sm:text-3xl font-mono font-extrabold tracking-widest uppercase break-all">
             {view.scrambled ? view.scrambled.split("").join(" ") : "..."}
           </span>
           {view.length && (
