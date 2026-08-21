@@ -35,6 +35,7 @@ import {
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/8bit/card";
 import { Button } from "@/components/ui/8bit/button";
 import { Badge } from "@/components/ui/badge";
+import { BackButton } from "@/components/ui/8bit/back-button";
 
 export default function AdminDashboardPage() {
   const [activeTab, setActiveTab] = useState<"overview" | "users" | "reports" | "logs">("overview");
@@ -168,6 +169,7 @@ export default function AdminDashboardPage() {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-card p-4 sm:p-6 border-2 border-foreground dark:border-ring shadow-sm">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
+            <BackButton href="/club/main-menu" />
             <Image
               src="/images/pixel-coin.gif"
               alt="Admin"
