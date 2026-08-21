@@ -19,6 +19,7 @@ import { MathSprintBoard } from "../components/MathSprintBoard";
 import { WordScrambleBoard } from "../components/WordScrambleBoard";
 import { NumberGuessBoard } from "../components/NumberGuessBoard";
 
+import { BackButton } from "@/components/ui/8bit/back-button";
 import {
   playGameStartSound,
   playWinFanfare,
@@ -64,17 +65,17 @@ export default function GameRunnerPage({ params }: GameRunnerProps) {
       setSession(result);
 
       if (result.done) {
-        if (result.progression?.levelUp) {
-          playLevelUp();
-          toast.success(`🎉 LEVEL UP! You reached Level ${result.progression.level}!`, { duration: 5000 });
-        } else if ((result.score && result.score > 0) || result.view?.won || result.view?.correct) {
+        if ((result.score && result.score > 0) || result.view?.won || result.view?.correct) {
           playWinFanfare();
+          toast.success(`🎉 Victory! Final Score: ${result.score}`);
         } else {
           playWrongSound();
+          toast("Game Over! Better luck next time.");
         }
 
-        if (result.progression?.xpGained && !result.progression.levelUp) {
-          toast.success(`+${result.progression.xpGained} XP Earned!`);
+        if (result.progression?.levelUp) {
+          playLevelUp();
+          toast.success(`⭐ LEVEL UP! You reached Level ${result.progression.level}!`, { duration: 5000 });
         }
 
         if (result.newAchievements && result.newAchievements.length > 0) {
@@ -120,8 +121,8 @@ export default function GameRunnerPage({ params }: GameRunnerProps) {
         return <NumberGuessBoard view={view} onMove={handleMove} isSubmitting={submitting} done={session.done} />;
       default:
         return (
-          <div className="p-8 text-center bg-muted border border-dashed rounded">
-            <p>Unsupported game type: {slug}</p>
+          <div className="p-8 text-center text-muted-foreground">
+            Unknown game type: {slug}
           </div>
         );
     }
@@ -131,12 +132,7 @@ export default function GameRunnerPage({ params }: GameRunnerProps) {
     <div className="min-h-screen w-full p-4 md:p-8 flex flex-col gap-6 max-w-4xl mx-auto">
       {/* Navigation Header */}
       <div className="flex items-center justify-between border-b border-primary/20 pb-4">
-        <Link href="/club/games">
-          <Button variant="outline" size="sm" className="gap-2">
-            <IconArrowLeft className="size-4" />
-            <span>Games Arena</span>
-          </Button>
-        </Link>
+        <BackButton href="/club/games" label="Games Arena" />
         <div className="flex items-center gap-3">
           <Badge variant="secondary" className="text-sm px-3 py-1 bg-amber-500/20 text-amber-300 border-amber-500/40">
             <IconTrophy className="size-4 mr-1 text-amber-400" />
