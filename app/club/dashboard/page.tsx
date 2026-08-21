@@ -21,6 +21,7 @@ import {
 
 import { DashboardNav } from "./components/DashboardNav";
 import { LiveLeaderboards } from "./components/LiveLeaderboards";
+import { BackButton } from "@/components/ui/8bit/back-button";
 
 export default function Page() {
   return (
@@ -58,13 +59,16 @@ export default function Page() {
           <div className="flex flex-1 flex-col">
             <div className="@container/main flex flex-1 flex-col gap-2">
               <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-                <div className="px-4 lg:px-6">
-                  <h1 className="text-lg font-semibold tracking-tight md:text-xl">
-                    Player Dashboard
-                  </h1>
-                  <p className="mt-1 text-xs text-muted-foreground md:text-sm">
-                    Hub activity, season performance, and live global rankings at a glance.
-                  </p>
+                <div className="px-4 lg:px-6 flex items-center gap-3">
+                  <BackButton href="/club/main-menu" />
+                  <div>
+                    <h1 className="text-lg font-semibold tracking-tight md:text-xl">
+                      Player Dashboard
+                    </h1>
+                    <p className="mt-0.5 text-xs text-muted-foreground md:text-sm">
+                      Hub activity, season performance, and live global rankings at a glance.
+                    </p>
+                  </div>
                 </div>
                 <SectionCards />
                 <div className="px-4 lg:px-6">
