@@ -14,7 +14,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { IconArrowLeft, IconSend, IconSparkles } from "@tabler/icons-react";
+import { BackButton } from "@/components/ui/8bit/back-button";
+import { IconSend, IconSparkles } from "@tabler/icons-react";
 import { toast } from "react-hot-toast";
 
 export default function CreateThreadPage() {
@@ -106,12 +107,7 @@ export default function CreateThreadPage() {
     <div className="min-h-screen w-full p-4 md:p-8 flex flex-col gap-6 max-w-3xl mx-auto">
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-3">
-          <Link href="/club/forum">
-            <Button variant="outline" size="sm" className="gap-2">
-              <IconArrowLeft className="size-4" />
-              <span>Back to Forum</span>
-            </Button>
-          </Link>
+          <BackButton href="/club/forum" label="Forum" />
           <h1 className="text-2xl font-extrabold tracking-tight">Create New Thread</h1>
         </div>
 
