@@ -22,6 +22,31 @@ const menuItems = [
     gif: "/images/pixel-gamepad.gif",
   },
   {
+    label: "PVP MULTIPLAYER ARENA",
+    url: "/club/pvp",
+    gif: "/images/pixel-heart.gif",
+  },
+  {
+    label: "COSMETICS SHOP & LOCKER",
+    url: "/club/shop",
+    gif: "/images/pixel-coin.gif",
+  },
+  {
+    label: "QUESTS & BATTLE PASS",
+    url: "/club/quests",
+    gif: "/images/pixel-coin.gif",
+  },
+  {
+    label: "GUILDS & SQUADS",
+    url: "/club/guilds",
+    gif: "/images/pixel-gamepad.gif",
+  },
+  {
+    label: "FRIENDS & DIRECT CHAT",
+    url: "/club/friends",
+    gif: "/images/pixel-heart.gif",
+  },
+  {
     label: "AI CHAT ASSISTANT",
     url: "/club/chat",
     gif: "/images/pixel-coin.gif",
@@ -34,6 +59,11 @@ const menuItems = [
   {
     label: "COMMUNITY FORUM",
     url: "/club/forum",
+    gif: "/images/pixel-coin.gif",
+  },
+  {
+    label: "ADMIN & MODERATION",
+    url: "/club/admin",
     gif: "/images/pixel-coin.gif",
   },
 ];
