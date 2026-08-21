@@ -7,7 +7,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/8bit/button";
 import { Badge } from "@/components/ui/8bit/badge";
 import { Progress } from "@/components/ui/8bit/progress";
-import { IconAward, IconLock, IconCheck, IconArrowLeft, IconTrophy } from "@tabler/icons-react";
+import { BackButton } from "@/components/ui/8bit/back-button";
+import { IconAward, IconLock, IconCheck, IconTrophy } from "@tabler/icons-react";
 import { toast } from "react-hot-toast";
 
 export default function AchievementsPage() {
@@ -50,12 +51,7 @@ export default function AchievementsPage() {
       {/* Navigation Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-primary/20 pb-4">
         <div className="flex items-center gap-3">
-          <Link href="/club/main-menu">
-            <Button variant="outline" size="sm" className="gap-2">
-              <IconArrowLeft className="size-4" />
-              <span>Menu</span>
-            </Button>
-          </Link>
+          <BackButton href="/club/main-menu" />
           <div>
             <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight flex items-center gap-2">
               <IconAward className="size-8 text-amber-400" />
