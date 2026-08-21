@@ -13,6 +13,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { BackButton } from "@/components/ui/8bit/back-button";
 import {
   IconMessage,
   IconPlus,
@@ -21,7 +22,6 @@ import {
   IconClock,
   IconEye,
   IconArrowUp,
-  IconArrowLeft,
   IconPin,
   IconLock,
 } from "@tabler/icons-react";
@@ -84,12 +84,7 @@ export default function ForumPage() {
       {/* Top Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-border pb-4">
         <div className="flex items-center gap-3">
-          <Link href="/club/main-menu">
-            <Button variant="outline" size="sm" className="gap-2 shrink-0">
-              <IconArrowLeft className="size-4" />
-              <span>Menu</span>
-            </Button>
-          </Link>
+          <BackButton href="/club/main-menu" />
           <div>
             <h1 className="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight flex items-center gap-2">
               <IconMessage className="size-6 sm:size-7 text-indigo-500 shrink-0" />
