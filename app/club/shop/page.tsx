@@ -29,6 +29,7 @@ import {
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/8bit/card";
 import { Button } from "@/components/ui/8bit/button";
 import { Badge } from "@/components/ui/badge";
+import { BackButton } from "@/components/ui/8bit/back-button";
 import { cn } from "@/lib/utils";
 
 type CategoryFilter = "all" | "theme" | "frame" | "title" | "badge" | "soundpack";
@@ -43,17 +44,17 @@ export default function ShopPage() {
   const [isPending, startTransition] = useTransition();
 
   const loadData = async () => {
-    const [catalogRes, balanceRes, invRes] = await Promise.all([
+    const [catRes, balRes, invRes] = await Promise.all([
       getCatalogAction(),
       getMyBalanceAction(),
       getMyInventoryAction(),
     ]);
 
-    if (catalogRes.success && catalogRes.catalog) {
-      setCatalog(catalogRes.catalog);
+    if (catRes.success && catRes.catalog) {
+      setCatalog(catRes.catalog);
     }
-    if (balanceRes.success && balanceRes.balance) {
-      setBalance(balanceRes.balance);
+    if (balRes.success && balRes.balance) {
+      setBalance(balRes.balance);
     }
     if (invRes.success && invRes.inventory) {
       setInventory(invRes.inventory);
@@ -68,12 +69,11 @@ export default function ShopPage() {
     startTransition(async () => {
       const res = await purchaseItemAction(item.slug);
       if (res.success) {
-        toast.success(`Purchased ${item.name}!`, {
-          description: "Item added to your inventory.",
+        toast.success(`Unlocked ${item.name}!`, {
+          description: "Item has been added to your inventory locker.",
         });
-        if (res.balance) setBalance(res.balance);
-        if (res.inventory) setInventory(res.inventory);
         setSelectedItem(null);
+        loadData();
       } else {
         toast.error("Purchase Failed", {
           description: res.error || "Could not complete transaction.",
@@ -120,8 +120,8 @@ export default function ShopPage() {
     }
   };
 
-  const getCategoryIcon = (cat: string) => {
-    switch (cat) {
+  const getCategoryIcon = (category: string) => {
+    switch (category) {
       case "theme":
         return <IconPalette className="size-4" />;
       case "frame":
@@ -141,6 +141,7 @@ export default function ShopPage() {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-card p-4 sm:p-6 border-2 border-foreground dark:border-ring shadow-sm">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
+            <BackButton href="/club/main-menu" />
             <Image
               src="/images/pixel-coin.gif"
               alt="Coin"
