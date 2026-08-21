@@ -18,6 +18,7 @@ import { getPvPLobbyAction, IPvPLobby } from "@/app/actions/multiplayer-actions"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/8bit/card";
 import { Button } from "@/components/ui/8bit/button";
 import { Badge } from "@/components/ui/badge";
+import { BackButton } from "@/components/ui/8bit/back-button";
 
 interface Props {
   params: Promise<{ code: string }>;
@@ -144,12 +145,7 @@ export default function PvPArenaRoomPage({ params }: Props) {
     <div className="max-w-4xl mx-auto space-y-6">
       {/* Top Navigation */}
       <div className="flex items-center justify-between">
-        <Link href="/club/pvp">
-          <Button variant="ghost" size="sm" className="font-mono text-xs flex items-center gap-1.5">
-            <IconArrowLeft className="size-4" />
-            <span>Leave Arena</span>
-          </Button>
-        </Link>
+        <BackButton href="/club/pvp" label="Leave Arena" />
 
         <div className="flex items-center gap-2">
           <span className="text-xs font-mono text-muted-foreground">ROOM:</span>
