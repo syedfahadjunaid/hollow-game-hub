@@ -18,7 +18,19 @@ import {
 import { Badge } from "@/components/ui/8bit/badge";
 import { getCurrentUserAction, logoutAction } from "@/app/actions/auth-actions";
 import { getMyProgressionAction, IPlayerProgression } from "@/app/actions/progression-actions";
-import { IconLogout, IconUser, IconFlame, IconSparkles } from "@tabler/icons-react";
+import Link from "next/link";
+import {
+  IconLogout,
+  IconUser,
+  IconFlame,
+  IconSparkles,
+  IconShoppingBag,
+  IconSwords,
+  IconUsers,
+  IconTarget,
+  IconShield,
+  IconShieldLock,
+} from "@tabler/icons-react";
 import toast from "react-hot-toast";
 
 interface IUser {
@@ -117,10 +129,52 @@ export default function HeaderProfile() {
             </div>
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
+          
+          <Link href="/club/shop">
+            <DropdownMenuItem className="cursor-pointer text-xs font-mono">
+              <IconShoppingBag className="mr-2 size-4 text-amber-400" />
+              <span>Shop & Locker</span>
+            </DropdownMenuItem>
+          </Link>
+          <Link href="/club/pvp">
+            <DropdownMenuItem className="cursor-pointer text-xs font-mono">
+              <IconSwords className="mr-2 size-4 text-rose-400" />
+              <span>PvP Arena</span>
+            </DropdownMenuItem>
+          </Link>
+          <Link href="/club/quests">
+            <DropdownMenuItem className="cursor-pointer text-xs font-mono">
+              <IconTarget className="mr-2 size-4 text-purple-400" />
+              <span>Quests & Pass</span>
+            </DropdownMenuItem>
+          </Link>
+          <Link href="/club/guilds">
+            <DropdownMenuItem className="cursor-pointer text-xs font-mono">
+              <IconShield className="mr-2 size-4 text-emerald-400" />
+              <span>Guilds & Squads</span>
+            </DropdownMenuItem>
+          </Link>
+          <Link href="/club/friends">
+            <DropdownMenuItem className="cursor-pointer text-xs font-mono">
+              <IconUsers className="mr-2 size-4 text-cyan-400" />
+              <span>Friends & Chat</span>
+            </DropdownMenuItem>
+          </Link>
+
+          {(user?.role === "admin" || user?.role === "moderator") && (
+            <Link href="/club/admin">
+              <DropdownMenuItem className="cursor-pointer text-xs font-mono text-purple-400">
+                <IconShieldLock className="mr-2 size-4 text-purple-400" />
+                <span>Admin Portal</span>
+              </DropdownMenuItem>
+            </Link>
+          )}
+
+          <DropdownMenuSeparator />
           {user ? (
             <DropdownMenuItem
               onClick={handleLogout}
-              className="cursor-pointer text-destructive focus:text-destructive"
+              className="cursor-pointer text-destructive focus:text-destructive text-xs font-mono"
             >
               <IconLogout className="mr-2 size-4" />
               <span>Sign Out</span>
@@ -128,7 +182,7 @@ export default function HeaderProfile() {
           ) : (
             <DropdownMenuItem
               onClick={() => router.push("/auth/login")}
-              className="cursor-pointer"
+              className="cursor-pointer text-xs font-mono"
             >
               <IconUser className="mr-2 size-4" />
               <span>Sign In</span>
