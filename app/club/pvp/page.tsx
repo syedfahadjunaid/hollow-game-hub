@@ -24,6 +24,7 @@ import {
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/8bit/card";
 import { Button } from "@/components/ui/8bit/button";
 import { Badge } from "@/components/ui/badge";
+import { BackButton } from "@/components/ui/8bit/back-button";
 
 export default function PvPHubPage() {
   const router = useRouter();
@@ -56,20 +57,22 @@ export default function PvPHubPage() {
     startTransition(async () => {
       const res = await createPvPLobbyAction(selectedGame, selectedRounds);
       if (res.success && res.lobby) {
-        toast.success(`Lobby ${res.lobby.code} created!`, {
-          description: "Entering multiplayer arena room...",
-        });
+        toast.success(`Match Lobby Created! Code: ${res.lobby.code}`);
         router.push(`/club/pvp/${res.lobby.code}`);
       } else {
-        toast.error("Failed to create lobby", { description: res.error });
+        toast.error("Could not create lobby", { description: res.error });
       }
     });
   };
 
   const handleJoinLobby = () => {
-    if (!joinCode.trim()) return;
+    if (!joinCode.trim()) {
+      toast.error("Please enter a room code.");
+      return;
+    }
+
     startTransition(async () => {
-      const res = await joinPvPLobbyAction(joinCode.trim());
+      const res = await joinPvPLobbyAction(joinCode.trim().toUpperCase());
       if (res.success && res.lobby) {
         toast.success(`Joined Lobby ${res.lobby.code}!`);
         router.push(`/club/pvp/${res.lobby.code}`);
@@ -96,6 +99,7 @@ export default function PvPHubPage() {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-card p-4 sm:p-6 border-2 border-foreground dark:border-ring shadow-sm">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
+            <BackButton href="/club/main-menu" />
             <Image
               src="/images/pixel-heart.gif"
               alt="Heart"
