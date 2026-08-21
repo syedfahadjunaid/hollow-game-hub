@@ -16,8 +16,8 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { BackButton } from "@/components/ui/8bit/back-button";
 import {
-  IconArrowLeft,
   IconArrowUp,
   IconMessage,
   IconEye,
@@ -152,12 +152,7 @@ export default function ThreadDetailPage({ params }: PageProps) {
     <div className="min-h-screen w-full p-4 md:p-8 flex flex-col gap-6 max-w-4xl mx-auto">
       {/* Back button */}
       <div className="flex items-center gap-3">
-        <Link href="/club/forum">
-          <Button variant="outline" size="sm" className="gap-2">
-            <IconArrowLeft className="size-4" />
-            <span>Back to Forum</span>
-          </Button>
-        </Link>
+        <BackButton href="/club/forum" label="Forum" />
       </div>
 
       {/* Main Thread Card */}
