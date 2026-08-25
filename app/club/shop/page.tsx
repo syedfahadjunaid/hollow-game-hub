@@ -13,8 +13,10 @@ import {
   IconPackage,
   IconCheck,
   IconSparkles,
+  IconHeadphones,
 } from "@tabler/icons-react";
 import { toast } from "sonner";
+import { setActiveSoundpack, previewSoundpack } from "@/lib/sound";
 
 import {
   getCatalogAction,
@@ -58,6 +60,9 @@ export default function ShopPage() {
     }
     if (invRes.success && invRes.inventory) {
       setInventory(invRes.inventory);
+      if (invRes.inventory.equipped?.soundpack) {
+        setActiveSoundpack(invRes.inventory.equipped.soundpack);
+      }
     }
   };
 
@@ -89,6 +94,10 @@ export default function ShopPage() {
         toast.success(itemSlug ? `Equipped ${slot}!` : `Unequipped ${slot}`);
         if (inventory && res.equipped) {
           setInventory({ ...inventory, equipped: res.equipped });
+        }
+        if (slot === "soundpack") {
+          setActiveSoundpack(itemSlug || "default");
+          previewSoundpack(itemSlug || "default");
         }
       } else {
         toast.error("Equip Failed", {
@@ -267,6 +276,19 @@ export default function ShopPage() {
                         )}
                       </div>
 
+                      {item.category === "soundpack" && (
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => previewSoundpack(item.slug)}
+                          className="text-[10px] font-mono h-7 gap-1 border-primary/40 text-primary hover:bg-primary/20"
+                          title="Preview Soundpack"
+                        >
+                          <IconHeadphones className="size-3" />
+                          <span>PREVIEW</span>
+                        </Button>
+                      )}
+
                       {owned ? (
                         <div className="flex items-center gap-1 text-xs text-emerald-400 font-mono font-bold">
                           <IconCheck className="size-4" />
@@ -363,7 +385,19 @@ export default function ShopPage() {
                           {details.description}
                         </CardDescription>
                       </CardHeader>
-                      <CardContent className="pt-2">
+                      <CardContent className="pt-2 space-y-2">
+                        {details.category === "soundpack" && (
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => previewSoundpack(details.slug)}
+                            className="w-full text-xs font-mono h-7 gap-1.5 border-primary/40 text-primary hover:bg-primary/20"
+                            title="Preview Soundpack"
+                          >
+                            <IconHeadphones className="size-3.5" />
+                            <span>PREVIEW AUDIO</span>
+                          </Button>
+                        )}
                         {details.category !== "badge" ? (
                           <Button
                             size="sm"
