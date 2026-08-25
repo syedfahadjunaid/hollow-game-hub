@@ -38,11 +38,15 @@ export default function ThemeSelector() {
           <SelectValue placeholder="Theme" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="default">Default</SelectItem>
-          <SelectItem value="sega">Sega</SelectItem>
-          <SelectItem value="gameboy">Gameboy</SelectItem>
-          <SelectItem value="atari">Atari</SelectItem>
-          <SelectItem value="nintendo">Nintendo</SelectItem>
+          <SelectItem value="default">Monochrome (8-Bit)</SelectItem>
+          <SelectItem value="sega">Sega (Genesis)</SelectItem>
+          <SelectItem value="gameboy">GameBoy (1989)</SelectItem>
+          <SelectItem value="atari">Atari (2600)</SelectItem>
+          <SelectItem value="nintendo">Nintendo (NES)</SelectItem>
+          <SelectItem value="cyberpunk">Cyberpunk (Neon)</SelectItem>
+          <SelectItem value="matrix">Matrix (Terminal)</SelectItem>
+          <SelectItem value="dracula">Dracula (Gothic)</SelectItem>
+          <SelectItem value="arcade">Arcade (Amber CRT)</SelectItem>
         </SelectContent>
       </Select>
     </div>
