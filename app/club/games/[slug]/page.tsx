@@ -18,6 +18,8 @@ import { RiddleBoard } from "../components/RiddleBoard";
 import { MathSprintBoard } from "../components/MathSprintBoard";
 import { WordScrambleBoard } from "../components/WordScrambleBoard";
 import { NumberGuessBoard } from "../components/NumberGuessBoard";
+import { MemoryMatchBoard } from "../components/MemoryMatchBoard";
+import { TicTacToeBoard } from "../components/TicTacToeBoard";
 
 import { BackButton } from "@/components/ui/8bit/back-button";
 import {
@@ -119,6 +121,10 @@ export default function GameRunnerPage({ params }: GameRunnerProps) {
         return <WordScrambleBoard view={view} onMove={handleMove} isSubmitting={submitting} done={session.done} />;
       case "number-guess":
         return <NumberGuessBoard view={view} onMove={handleMove} isSubmitting={submitting} done={session.done} />;
+      case "memory-match":
+        return <MemoryMatchBoard view={view} onMove={handleMove} isSubmitting={submitting} done={session.done} />;
+      case "tic-tac-toe":
+        return <TicTacToeBoard view={view} onMove={handleMove} isSubmitting={submitting} done={session.done} />;
       default:
         return (
           <div className="p-8 text-center text-muted-foreground">
