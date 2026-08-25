@@ -20,6 +20,8 @@ const GAME_ICONS: Record<string, string> = {
   "riddle": "🧩",
   "wordle": "🟩",
   "hangman": "🪓",
+  "memory-match": "🃏",
+  "tic-tac-toe": "⭕",
 };
 
 export default function GamesCatalogPage() {
