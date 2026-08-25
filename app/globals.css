@@ -469,12 +469,300 @@
   --sidebar-ring: oklch(0.5 0.2 280);
 }
 
+/* 🌸 CYBERPUNK: Neon Hot Pink, Electric Cyan & High Contrast Dark */
+.cyberpunk-light {
+  --radius: 0rem;
+  --primary: oklch(0.65 0.3 350);
+  --primary-foreground: oklch(1 0 0);
+  --background: oklch(0.95 0.05 320);
+  --foreground: oklch(0.15 0.1 320);
+  --card: oklch(0.98 0.02 320);
+  --card-foreground: oklch(0.15 0.1 320);
+  --popover: oklch(0.98 0.02 320);
+  --popover-foreground: oklch(0.15 0.1 320);
+  --secondary: oklch(0.85 0.15 200);
+  --secondary-foreground: oklch(0.15 0.1 320);
+  --muted: oklch(0.9 0.05 320);
+  --muted-foreground: oklch(0.45 0.1 320);
+  --accent: oklch(0.7 0.25 200);
+  --accent-foreground: oklch(1 0 0);
+  --destructive: oklch(0.6 0.25 25);
+  --border: oklch(0.65 0.3 350);
+  --input: oklch(0.85 0.1 200);
+  --ring: oklch(0.65 0.3 350);
+  --chart-1: oklch(0.65 0.3 350);
+  --chart-2: oklch(0.7 0.25 200);
+  --chart-3: oklch(0.8 0.2 80);
+  --chart-4: oklch(0.6 0.25 290);
+  --chart-5: oklch(0.75 0.2 150);
+  --sidebar: oklch(0.95 0.05 320);
+  --sidebar-foreground: oklch(0.15 0.1 320);
+  --sidebar-primary: oklch(0.65 0.3 350);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.7 0.25 200);
+  --sidebar-accent-foreground: oklch(1 0 0);
+  --sidebar-border: oklch(0.65 0.3 350);
+  --sidebar-ring: oklch(0.65 0.3 350);
+}
+
+.dark.cyberpunk,
+.cyberpunk-dark {
+  --primary: oklch(0.7 0.3 340);
+  --primary-foreground: oklch(0.05 0.05 320);
+  --background: oklch(0.1 0.05 300);
+  --foreground: oklch(0.95 0.05 200);
+  --card: oklch(0.15 0.06 300);
+  --card-foreground: oklch(0.95 0.05 200);
+  --popover: oklch(0.15 0.06 300);
+  --popover-foreground: oklch(0.95 0.05 200);
+  --secondary: oklch(0.25 0.1 200);
+  --secondary-foreground: oklch(0.95 0.05 200);
+  --muted: oklch(0.2 0.05 300);
+  --muted-foreground: oklch(0.7 0.1 200);
+  --accent: oklch(0.75 0.25 200);
+  --accent-foreground: oklch(0.05 0.05 320);
+  --destructive: oklch(0.65 0.25 25);
+  --border: oklch(0.7 0.3 340);
+  --input: oklch(0.75 0.25 200);
+  --ring: oklch(0.7 0.3 340);
+  --chart-1: oklch(0.7 0.3 340);
+  --chart-2: oklch(0.75 0.25 200);
+  --chart-3: oklch(0.85 0.2 120);
+  --chart-4: oklch(0.65 0.25 290);
+  --chart-5: oklch(0.8 0.2 50);
+  --sidebar: oklch(0.12 0.05 300);
+  --sidebar-foreground: oklch(0.95 0.05 200);
+  --sidebar-primary: oklch(0.7 0.3 340);
+  --sidebar-primary-foreground: oklch(0.05 0.05 320);
+  --sidebar-accent: oklch(0.75 0.25 200);
+  --sidebar-accent-foreground: oklch(0.05 0.05 320);
+  --sidebar-border: oklch(0.7 0.3 340);
+  --sidebar-ring: oklch(0.7 0.3 340);
+}
+
+/* 🟢 MATRIX: Terminal Hacker Phosphor Green & Pure Shadow */
+.matrix-light {
+  --radius: 0rem;
+  --primary: oklch(0.45 0.25 145);
+  --primary-foreground: oklch(0.98 0 0);
+  --background: oklch(0.94 0.03 145);
+  --foreground: oklch(0.1 0.1 145);
+  --card: oklch(0.98 0.01 145);
+  --card-foreground: oklch(0.1 0.1 145);
+  --popover: oklch(0.98 0.01 145);
+  --popover-foreground: oklch(0.1 0.1 145);
+  --secondary: oklch(0.85 0.08 145);
+  --secondary-foreground: oklch(0.1 0.1 145);
+  --muted: oklch(0.9 0.04 145);
+  --muted-foreground: oklch(0.35 0.1 145);
+  --accent: oklch(0.5 0.25 145);
+  --accent-foreground: oklch(1 0 0);
+  --destructive: oklch(0.55 0.25 25);
+  --border: oklch(0.45 0.25 145);
+  --input: oklch(0.5 0.2 145);
+  --ring: oklch(0.45 0.25 145);
+  --chart-1: oklch(0.45 0.25 145);
+  --chart-2: oklch(0.6 0.25 145);
+  --chart-3: oklch(0.75 0.2 145);
+  --chart-4: oklch(0.3 0.15 145);
+  --chart-5: oklch(0.55 0.25 170);
+  --sidebar: oklch(0.94 0.03 145);
+  --sidebar-foreground: oklch(0.1 0.1 145);
+  --sidebar-primary: oklch(0.45 0.25 145);
+  --sidebar-primary-foreground: oklch(0.98 0 0);
+  --sidebar-accent: oklch(0.5 0.25 145);
+  --sidebar-accent-foreground: oklch(1 0 0);
+  --sidebar-border: oklch(0.45 0.25 145);
+  --sidebar-ring: oklch(0.45 0.25 145);
+}
+
+.dark.matrix,
+.matrix-dark {
+  --primary: oklch(0.75 0.3 145);
+  --primary-foreground: oklch(0.05 0.05 145);
+  --background: oklch(0.08 0.02 145);
+  --foreground: oklch(0.85 0.25 145);
+  --card: oklch(0.12 0.04 145);
+  --card-foreground: oklch(0.85 0.25 145);
+  --popover: oklch(0.12 0.04 145);
+  --popover-foreground: oklch(0.85 0.25 145);
+  --secondary: oklch(0.2 0.08 145);
+  --secondary-foreground: oklch(0.85 0.25 145);
+  --muted: oklch(0.18 0.06 145);
+  --muted-foreground: oklch(0.6 0.2 145);
+  --accent: oklch(0.75 0.3 145);
+  --accent-foreground: oklch(0.05 0.05 145);
+  --destructive: oklch(0.6 0.25 25);
+  --border: oklch(0.75 0.3 145);
+  --input: oklch(0.75 0.3 145);
+  --ring: oklch(0.75 0.3 145);
+  --chart-1: oklch(0.75 0.3 145);
+  --chart-2: oklch(0.6 0.25 145);
+  --chart-3: oklch(0.85 0.2 145);
+  --chart-4: oklch(0.4 0.15 145);
+  --chart-5: oklch(0.7 0.25 170);
+  --sidebar: oklch(0.1 0.03 145);
+  --sidebar-foreground: oklch(0.85 0.25 145);
+  --sidebar-primary: oklch(0.75 0.3 145);
+  --sidebar-primary-foreground: oklch(0.05 0.05 145);
+  --sidebar-accent: oklch(0.2 0.08 145);
+  --sidebar-accent-foreground: oklch(0.85 0.25 145);
+  --sidebar-border: oklch(0.75 0.3 145);
+  --sidebar-ring: oklch(0.75 0.3 145);
+}
+
+/* 🧛 DRACULA: Gothic Vampire Purple, Electric Coral, & Cyan Glow */
+.dracula-light {
+  --radius: 0rem;
+  --primary: oklch(0.5 0.25 300);
+  --primary-foreground: oklch(1 0 0);
+  --background: oklch(0.95 0.02 280);
+  --foreground: oklch(0.15 0.08 280);
+  --card: oklch(0.98 0.01 280);
+  --card-foreground: oklch(0.15 0.08 280);
+  --popover: oklch(0.98 0.01 280);
+  --popover-foreground: oklch(0.15 0.08 280);
+  --secondary: oklch(0.85 0.08 300);
+  --secondary-foreground: oklch(0.15 0.08 280);
+  --muted: oklch(0.9 0.03 280);
+  --muted-foreground: oklch(0.4 0.08 280);
+  --accent: oklch(0.6 0.25 15);
+  --accent-foreground: oklch(1 0 0);
+  --destructive: oklch(0.55 0.25 25);
+  --border: oklch(0.5 0.25 300);
+  --input: oklch(0.5 0.25 300);
+  --ring: oklch(0.5 0.25 300);
+  --chart-1: oklch(0.5 0.25 300);
+  --chart-2: oklch(0.6 0.25 15);
+  --chart-3: oklch(0.7 0.2 180);
+  --chart-4: oklch(0.75 0.2 100);
+  --chart-5: oklch(0.6 0.2 340);
+  --sidebar: oklch(0.95 0.02 280);
+  --sidebar-foreground: oklch(0.15 0.08 280);
+  --sidebar-primary: oklch(0.5 0.25 300);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.85 0.08 300);
+  --sidebar-accent-foreground: oklch(0.15 0.08 280);
+  --sidebar-border: oklch(0.5 0.25 300);
+  --sidebar-ring: oklch(0.5 0.25 300);
+}
+
+.dark.dracula,
+.dracula-dark {
+  --primary: oklch(0.75 0.22 300);
+  --primary-foreground: oklch(0.1 0.05 280);
+  --background: oklch(0.14 0.05 280);
+  --foreground: oklch(0.95 0.02 280);
+  --card: oklch(0.18 0.06 280);
+  --card-foreground: oklch(0.95 0.02 280);
+  --popover: oklch(0.18 0.06 280);
+  --popover-foreground: oklch(0.95 0.02 280);
+  --secondary: oklch(0.28 0.08 280);
+  --secondary-foreground: oklch(0.95 0.02 280);
+  --muted: oklch(0.22 0.05 280);
+  --muted-foreground: oklch(0.7 0.05 280);
+  --accent: oklch(0.75 0.22 15);
+  --accent-foreground: oklch(0.1 0.05 280);
+  --destructive: oklch(0.65 0.25 25);
+  --border: oklch(0.75 0.22 300);
+  --input: oklch(0.75 0.22 300);
+  --ring: oklch(0.75 0.22 300);
+  --chart-1: oklch(0.75 0.22 300);
+  --chart-2: oklch(0.75 0.22 15);
+  --chart-3: oklch(0.8 0.18 180);
+  --chart-4: oklch(0.85 0.18 100);
+  --chart-5: oklch(0.75 0.2 340);
+  --sidebar: oklch(0.14 0.05 280);
+  --sidebar-foreground: oklch(0.95 0.02 280);
+  --sidebar-primary: oklch(0.75 0.22 300);
+  --sidebar-primary-foreground: oklch(0.1 0.05 280);
+  --sidebar-accent: oklch(0.28 0.08 280);
+  --sidebar-accent-foreground: oklch(0.95 0.02 280);
+  --sidebar-border: oklch(0.75 0.22 300);
+  --sidebar-ring: oklch(0.75 0.22 300);
+}
+
+/* 🪙 ARCADE AMBER: 1980s Phosphor CRT Amber Glow */
+.arcade-light {
+  --radius: 0rem;
+  --primary: oklch(0.55 0.25 70);
+  --primary-foreground: oklch(0 0 0);
+  --background: oklch(0.95 0.04 80);
+  --foreground: oklch(0.15 0.08 70);
+  --card: oklch(0.98 0.02 80);
+  --card-foreground: oklch(0.15 0.08 70);
+  --popover: oklch(0.98 0.02 80);
+  --popover-foreground: oklch(0.15 0.08 70);
+  --secondary: oklch(0.88 0.1 75);
+  --secondary-foreground: oklch(0.15 0.08 70);
+  --muted: oklch(0.92 0.05 80);
+  --muted-foreground: oklch(0.4 0.1 70);
+  --accent: oklch(0.6 0.25 70);
+  --accent-foreground: oklch(0 0 0);
+  --destructive: oklch(0.55 0.25 25);
+  --border: oklch(0.55 0.25 70);
+  --input: oklch(0.55 0.25 70);
+  --ring: oklch(0.55 0.25 70);
+  --chart-1: oklch(0.55 0.25 70);
+  --chart-2: oklch(0.7 0.25 65);
+  --chart-3: oklch(0.8 0.2 85);
+  --chart-4: oklch(0.45 0.2 55);
+  --chart-5: oklch(0.6 0.2 40);
+  --sidebar: oklch(0.95 0.04 80);
+  --sidebar-foreground: oklch(0.15 0.08 70);
+  --sidebar-primary: oklch(0.55 0.25 70);
+  --sidebar-primary-foreground: oklch(0 0 0);
+  --sidebar-accent: oklch(0.88 0.1 75);
+  --sidebar-accent-foreground: oklch(0.15 0.08 70);
+  --sidebar-border: oklch(0.55 0.25 70);
+  --sidebar-ring: oklch(0.55 0.25 70);
+}
+
+.dark.arcade,
+.arcade-dark {
+  --primary: oklch(0.8 0.25 75);
+  --primary-foreground: oklch(0.08 0.05 70);
+  --background: oklch(0.08 0.03 70);
+  --foreground: oklch(0.88 0.22 75);
+  --card: oklch(0.13 0.05 70);
+  --card-foreground: oklch(0.88 0.22 75);
+  --popover: oklch(0.13 0.05 70);
+  --popover-foreground: oklch(0.88 0.22 75);
+  --secondary: oklch(0.22 0.08 70);
+  --secondary-foreground: oklch(0.88 0.22 75);
+  --muted: oklch(0.18 0.05 70);
+  --muted-foreground: oklch(0.65 0.18 75);
+  --accent: oklch(0.8 0.25 75);
+  --accent-foreground: oklch(0.08 0.05 70);
+  --destructive: oklch(0.6 0.25 25);
+  --border: oklch(0.8 0.25 75);
+  --input: oklch(0.8 0.25 75);
+  --ring: oklch(0.8 0.25 75);
+  --chart-1: oklch(0.8 0.25 75);
+  --chart-2: oklch(0.7 0.22 65);
+  --chart-3: oklch(0.88 0.2 85);
+  --chart-4: oklch(0.55 0.18 55);
+  --chart-5: oklch(0.7 0.2 40);
+  --sidebar: oklch(0.1 0.04 70);
+  --sidebar-foreground: oklch(0.88 0.22 75);
+  --sidebar-primary: oklch(0.8 0.25 75);
+  --sidebar-primary-foreground: oklch(0.08 0.05 70);
+  --sidebar-accent: oklch(0.22 0.08 70);
+  --sidebar-accent-foreground: oklch(0.88 0.22 75);
+  --sidebar-border: oklch(0.8 0.25 75);
+  --sidebar-ring: oklch(0.8 0.25 75);
+}
+
 .dark,
 .default-dark,
 .sega-dark,
 .gameboy-dark,
 .atari-dark,
-.nintendo-dark {
+.nintendo-dark,
+.cyberpunk-dark,
+.matrix-dark,
+.dracula-dark,
+.arcade-dark {
   color-scheme: dark;
 }
 
